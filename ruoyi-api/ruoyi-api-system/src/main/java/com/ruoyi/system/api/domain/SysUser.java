@@ -2,7 +2,9 @@ package com.ruoyi.system.api.domain;
 
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
+
+import com.ruoyi.system.api.enums.UserType;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.annotation.Excel;
@@ -14,7 +16,7 @@ import com.ruoyi.common.core.xss.Xss;
 
 /**
  * 用户对象 sys_user
- * 
+ *
  * @author ruoyi
  */
 public class SysUser extends BaseEntity
@@ -36,6 +38,9 @@ public class SysUser extends BaseEntity
     /** 用户昵称 */
     @Excel(name = "用户名称")
     private String nickName;
+
+    @Excel(name = "用户类型")
+    private UserType userType;
 
     /** 用户邮箱 */
     @Excel(name = "用户邮箱")
@@ -296,6 +301,15 @@ public class SysUser extends BaseEntity
     {
         this.roleId = roleId;
     }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -303,6 +317,7 @@ public class SysUser extends BaseEntity
             .append("deptId", getDeptId())
             .append("userName", getUserName())
             .append("nickName", getNickName())
+            .append("userType", getUserType())
             .append("email", getEmail())
             .append("phonenumber", getPhonenumber())
             .append("sex", getSex())

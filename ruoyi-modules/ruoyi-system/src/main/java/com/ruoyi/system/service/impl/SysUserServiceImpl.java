@@ -3,7 +3,9 @@ package com.ruoyi.system.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Validator;
+import jakarta.validation.Validator;
+
+import com.ruoyi.system.api.enums.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -540,5 +542,7 @@ public class SysUserServiceImpl implements ISysUserService
         }
         return successMsg.toString();
     }
+
+
 
 }

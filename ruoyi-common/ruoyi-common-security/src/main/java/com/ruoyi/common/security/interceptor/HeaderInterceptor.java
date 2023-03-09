@@ -1,7 +1,5 @@
 package com.ruoyi.common.security.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import com.ruoyi.common.core.constant.SecurityConstants;
@@ -11,6 +9,8 @@ import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.security.auth.AuthUtil;
 import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.model.LoginUser;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 自定义请求头拦截器，将Header数据封装到线程变量中方便获取

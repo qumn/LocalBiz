@@ -3,7 +3,7 @@ server:
   port: 9201
 
 # Spring
-spring: 
+spring:
   application:
     # 应用名称
     name: ruoyi-system
@@ -23,3 +23,11 @@ spring:
         # 共享配置
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+mybatis:
+  configuration:
+    default-enum-type-handler: com.ruoyi.common.core.enums.MybatisEnumTypeHandler
+
+logging:
+  level:
+    com.ruoyi.system.mapper: debug
+

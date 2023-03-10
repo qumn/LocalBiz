@@ -1,11 +1,8 @@
 package com.ruoyi.system.api;
 
+import com.ruoyi.system.api.enums.UserType;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.core.constant.SecurityConstants;
 import com.ruoyi.common.core.constant.ServiceNameConstants;
 import com.ruoyi.common.core.domain.R;
@@ -40,4 +37,13 @@ public interface RemoteUserService
      */
     @PostMapping("/user/register")
     public R<Boolean> registerUserInfo(@RequestBody SysUser sysUser, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+
+    /**
+     * 修改用户类型
+     * @param userId 用户id
+     * @param userType 目标用户类型
+     * @return
+     */
+    @PutMapping("/user/userType/{userId}")
+    public R<Boolean> updateUserType(@PathVariable("userId") Long userId,@RequestParam("userType") UserType userType);
 }

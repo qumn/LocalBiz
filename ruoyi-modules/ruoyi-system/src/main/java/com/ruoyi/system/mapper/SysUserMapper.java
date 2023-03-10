@@ -1,6 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
+
+import com.ruoyi.system.api.enums.UserType;
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.system.api.domain.SysUser;
 
@@ -75,6 +77,14 @@ public interface SysUserMapper
      * @return 结果
      */
     public int updateUserAvatar(@Param("userName") String userName, @Param("avatar") String avatar);
+
+    /**
+     * 修改用户类型
+     * @param userId 用户名
+     * @param userType 用户类型
+     * @return
+     */
+    boolean updateUserType(@Param("userId") Long userId, @Param("userType") UserType userType);
 
     /**
      * 重置用户密码

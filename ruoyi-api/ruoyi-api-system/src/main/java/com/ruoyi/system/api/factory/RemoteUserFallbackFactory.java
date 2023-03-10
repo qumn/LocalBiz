@@ -1,5 +1,6 @@
 package com.ruoyi.system.api.factory;
 
+import com.ruoyi.system.api.enums.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -25,6 +26,11 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
         log.error("用户服务调用失败:{}", throwable.getMessage());
         return new RemoteUserService()
         {
+            @Override
+            public R<Boolean> updateUserType(Long userId, UserType userType) {
+                return R.fail("修改用户类型失败" + throwable.getMessage());
+            }
+
             @Override
             public R<LoginUser> getUserInfo(String username, String source)
             {

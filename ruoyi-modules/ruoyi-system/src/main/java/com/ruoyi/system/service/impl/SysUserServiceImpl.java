@@ -353,6 +353,16 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
+     * 修改用户类型
+     * @param userId 用户名
+     * @param userType 用户类型
+     * @return
+     */
+    @Override
+    public boolean updateUserType(Long userId, UserType userType) {
+        return userMapper.updateUserType(userId, userType);
+    }
+    /**
      * 重置用户密码
      * 
      * @param user 用户信息

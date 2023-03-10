@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.api.domain.SysUser;
+import com.ruoyi.system.api.enums.UserType;
 
 /**
  * 用户 业务层
@@ -160,6 +161,14 @@ public interface ISysUserService
      * @return 结果
      */
     public boolean updateUserAvatar(String userName, String avatar);
+
+    /**
+     * 修改用户类型
+     * @param userId 用户名
+     * @param userType 用户类型
+     * @return
+     */
+    boolean updateUserType(Long userId, UserType userType);
 
     /**
      * 重置用户密码

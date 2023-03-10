@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.ruoyi.common.security.annotation.EnableCustomConfig;
 import com.ruoyi.common.security.annotation.EnableRyFeignClients;
-import com.ruoyi.common.swagger.annotation.EnableCustomSwagger2;
 
 /**
  * 系统模块
@@ -12,9 +11,9 @@ import com.ruoyi.common.swagger.annotation.EnableCustomSwagger2;
  * @author ruoyi
  */
 @EnableCustomConfig
-@EnableCustomSwagger2
 @EnableRyFeignClients
 @SpringBootApplication
+//@ComponentScan(excludeFilters={@ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, value= DruidDataSourceAutoConfigure.class)})
 public class RuoYiSystemApplication
 {
     public static void main(String[] args)

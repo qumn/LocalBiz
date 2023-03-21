@@ -24,7 +24,7 @@
         <ruoyi.version>3.6.2</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2022.0.1</spring-cloud.version>
-        <hibernate-spatial.version>5.2.5.Final</hibernate-spatial.version>
+        <hibernate-spatial.version>6.1.6.Final</hibernate-spatial.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
     </properties>
 
@@ -68,6 +68,16 @@
             <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-api-system</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-common-core</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-common-security</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 

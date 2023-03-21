@@ -8,4 +8,6 @@ import java.util.List;
 public interface MerchantDao extends CrudRepository<MerchantEntity, Long> {
 
     List<MerchantEntity> findByMidAndName(Long mid, String name);
+
+    List<MerchantEntity> findByOwner(Long owner);
 }

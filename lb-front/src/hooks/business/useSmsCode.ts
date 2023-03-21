@@ -1,6 +1,5 @@
 import { computed } from 'vue';
 import { REGEXP_PHONE } from '@/config';
-import { fetchSmsCode } from '@/service';
 import { useLoading } from '../common';
 import useCountDown from './useCountDown';
 
@@ -43,12 +42,12 @@ export default function useSmsCode() {
     if (!valid || loading.value) return;
 
     startLoading();
-    const { data } = await fetchSmsCode(phone);
-    if (data) {
-      window.$message?.success('验证码发送成功！');
-      start();
-    }
-    endLoading();
+    //const { data } = await fetchSmsCode(phone);
+    // if (data) {
+    //   window.$message?.success('验证码发送成功！');
+    //   start();
+    // }
+    // endLoading();
   }
 
   return {

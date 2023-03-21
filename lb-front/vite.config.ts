@@ -34,10 +34,12 @@ export default defineConfig(configEnv => {
       port: 3200,
       open: true,
       proxy: {
-				'/file': {
+				// all request
+				'/api': {
 					target: 'http://localhost:8080/',
 					changeOrigin: true,
-				}
+					rewrite: (path) => path.replace(/^\/api/, ''),
+				},
 			}
     },
     optimizeDeps: {

@@ -31,7 +31,7 @@ export default class CustomAxiosInstance {
       codeKey: 'code',
       dataKey: 'data',
       msgKey: 'message',
-      successCode: 200
+      successCode: 200,
     }
   ) {
     this.backendConfig = backendConfig;
@@ -42,14 +42,14 @@ export default class CustomAxiosInstance {
   /** 设置请求拦截器 */
   setInterceptor() {
     this.instance.interceptors.request.use(
-      async config => {
+      config => {
         const handleConfig = { ...config };
         if (handleConfig.headers) {
           // 数据转换
-          const contentType = handleConfig.headers['Content-Type'] as string;
-          handleConfig.data = await transformRequestData(handleConfig.data, contentType);
+          //const contentType = handleConfig.headers['Content-Type'] as string;
+          //handleConfig.data = await transformRequestData(handleConfig.data, contentType);
           // 设置token
-          handleConfig.headers.Authorization = localStg.get('token') || '';
+					handleConfig.headers['Authorization'] = 'Bearer ' + localStg.get("token");
         }
         return handleConfig;
       },
@@ -66,9 +66,8 @@ export default class CustomAxiosInstance {
           const { codeKey, dataKey, successCode } = this.backendConfig;
           // 请求成功
           if (backend[codeKey] === successCode) {
-            return handleServiceResult(null, backend[dataKey]);
+            return handleServiceResult(null, dataKey === "*" ? backend : backend[dataKey]);
           }
-
           // token失效, 刷新token
           if (REFRESH_TOKEN_CODE.includes(backend[codeKey])) {
             const config = await handleRefreshToken(response.config);

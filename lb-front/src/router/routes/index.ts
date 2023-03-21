@@ -29,6 +29,15 @@ export const constantRoutes: AuthRoute.Route[] = [
       singleLayout: 'blank'
     }
   },
+	{
+		name: 'register',
+		path: '/register',
+		component: 'self',
+		meta: {
+			title: '注册',
+			singleLayout: 'blank'
+		}
+	},
   {
     name: 'constant-page',
     path: '/constant-page',

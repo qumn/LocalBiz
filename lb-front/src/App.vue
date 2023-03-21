@@ -8,6 +8,7 @@
   >
     <naive-provider>
       <router-view />
+      <p>hello world</p>
     </naive-provider>
   </n-config-provider>
 </template>
@@ -19,8 +20,10 @@ import { useGlobalEvents } from '@/composables';
 
 const theme = useThemeStore();
 
+
 subscribeStore();
 useGlobalEvents();
+
 </script>
 
 <style scoped></style>

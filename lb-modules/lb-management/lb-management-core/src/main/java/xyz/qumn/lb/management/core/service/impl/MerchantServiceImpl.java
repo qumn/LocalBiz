@@ -5,7 +5,6 @@ import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.api.RemoteUserService;
 import com.ruoyi.system.api.enums.UserType;
 import lombok.extern.java.Log;
-import org.apache.http.impl.cookie.RFC2109DomainHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.qumn.lb.management.core.dao.MerchantDao;

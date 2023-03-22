@@ -1,7 +1,10 @@
 package xyz.qumn.lb.management.core.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import xyz.qumn.lb.management.core.pojo.entity.CommodityEntity;
 
-public interface CommodityDao extends CrudRepository<CommodityEntity, Long> {
+import java.util.List;
+
+public interface CommodityDao extends ListCrudRepository<CommodityEntity, Long> {
+    List<CommodityEntity> findByMid(Long mid);
 }

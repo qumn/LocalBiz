@@ -18,10 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 public class CommodityEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long cid;
     @Comment("商店id")
     Long mid; // 冗余字段方便查询
+    @Comment("分类id")
+    Long catId;
     @Comment("商品名称")
     String name;
     @Comment("商品图片")
@@ -30,9 +32,9 @@ public class CommodityEntity {
     @Column(name = "`desc`")
     String desc;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "catId")
+    @JoinColumn(name = "catId", insertable = false, updatable = false)
     CategoryEntity category;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "commodity")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "commodity", cascade = CascadeType.PERSIST)
     List<SpecificationEntity> specifications;
     @Comment("创建时间")
     @UpdateTimestamp
@@ -40,6 +42,7 @@ public class CommodityEntity {
     @Comment("修改时间")
     @CreationTimestamp
     Date updateTime;
+
 
     @Override
     public String toString() {

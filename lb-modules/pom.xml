@@ -26,6 +26,7 @@
         <spring-cloud.version>2022.0.1</spring-cloud.version>
         <hibernate-spatial.version>6.1.6.Final</hibernate-spatial.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
+        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -80,7 +81,11 @@
                 <artifactId>ruoyi-common-security</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>

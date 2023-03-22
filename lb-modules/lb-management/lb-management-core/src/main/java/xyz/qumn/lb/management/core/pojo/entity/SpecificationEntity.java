@@ -21,11 +21,11 @@ public class SpecificationEntity {
     @Comment("价格")
     Integer price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cid")
     CommodityEntity commodity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "specification")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "specification", cascade = CascadeType.PERSIST)
     List<SpecificationAttributeEntity> attributes;
 
     @Override

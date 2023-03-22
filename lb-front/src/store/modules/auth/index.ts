@@ -153,13 +153,13 @@ export const useAuthStore = defineStore("auth-store", {
 					password: "user01123",
 				},
 			};
-			const { userName, password } = accounts[userRole];
-			const { data } = await fetchLogin(userName, password);
-			if (data) {
-				await this.loginByToken(data);
-				resetRouteStore();
-				initAuthRoute();
-			}
+			// const { userName, password } = accounts[userRole];
+			//const { data } = await fetchLogin(userName, password);
+			// if (data) {
+			// 	await this.loginByToken(data);
+			// 	resetRouteStore();
+			// 	initAuthRoute();
+			// }
 		},
 	},
 });

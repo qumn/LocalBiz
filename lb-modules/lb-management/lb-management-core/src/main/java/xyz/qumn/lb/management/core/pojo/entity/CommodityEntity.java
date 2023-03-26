@@ -34,7 +34,7 @@ public class CommodityEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "catId", insertable = false, updatable = false)
     CategoryEntity category;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "commodity", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "commodity", cascade = CascadeType.ALL)
     List<SpecificationEntity> specifications;
     @Comment("创建时间")
     @UpdateTimestamp

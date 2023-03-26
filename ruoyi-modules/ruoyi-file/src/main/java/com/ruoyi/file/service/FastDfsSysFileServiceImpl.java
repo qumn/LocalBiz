@@ -37,6 +37,6 @@ public class FastDfsSysFileServiceImpl implements ISysFileService
     {
         StorePath storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(),
                 FileTypeUtils.getExtension(file), null);
-        return domain + "/" + storePath.getFullPath();
+        return storePath.getFullPath();
     }
 }

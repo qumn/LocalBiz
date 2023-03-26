@@ -3,6 +3,9 @@ package xyz.qumn.lb.management.api.request.commodity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import xyz.qumn.lb.management.api.dto.SpecificationDto;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,4 +17,5 @@ public class CommodityUpdateRequest {
     String name;
     String img;
     String desc;
+    List<SpecificationDto> specifications;
 }

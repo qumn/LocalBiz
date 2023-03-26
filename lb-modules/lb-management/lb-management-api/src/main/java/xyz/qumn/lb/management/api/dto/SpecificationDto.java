@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SpecificationDto {
     // 以分为单位
+    Long sid;
     Integer price;
     List<SpecificationAttributeDto> attributes;
 }

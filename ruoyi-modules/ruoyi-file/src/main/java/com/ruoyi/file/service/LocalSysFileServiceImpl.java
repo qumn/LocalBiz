@@ -44,7 +44,6 @@ public class LocalSysFileServiceImpl implements ISysFileService
     public String uploadFile(MultipartFile file) throws Exception
     {
         String name = FileUploadUtils.upload(localFilePath, file);
-        String url = domain + localFilePrefix + name;
-        return url;
+        return name;
     }
 }

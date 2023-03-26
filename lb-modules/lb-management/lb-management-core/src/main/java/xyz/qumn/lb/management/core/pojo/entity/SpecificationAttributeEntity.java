@@ -25,7 +25,7 @@ public class SpecificationAttributeEntity {
     @Column(name = "`value`")
     String value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sid")
     SpecificationEntity specification;
 

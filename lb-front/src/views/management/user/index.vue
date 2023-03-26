@@ -28,7 +28,7 @@
   </n-card>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="tsx" type="tsx">
 import { reactive, ref } from 'vue';
 import type { Ref } from 'vue';
 import { NButton, NPopconfirm, NSpace, NTag } from 'naive-ui';

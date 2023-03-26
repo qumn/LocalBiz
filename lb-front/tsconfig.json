@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
+    "tsx": "preserve",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noUnusedLocals": true,

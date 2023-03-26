@@ -9,10 +9,14 @@ const merchant: AuthRoute.Route = {
       path: '/merchant/register',
       component: 'self',
       meta: { title: '注册', icon: 'mdi:menu' }
+    },
+    {
+      name: 'merchant_management',
+      path: '/merchant/management',
+      component: 'self',
+      meta: { title: '管理界面', icon: 'mdi:menu' }
     }
   ]
 };
 
 export default merchant;
-
-

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.qumn.lb.management.core.dao.CategoryMapper">
+
+    <resultMap type="xyz.qumn.lb.management.core.pojo.entity.Category" id="CategoryMap">
+        <result property="catId" column="cat_id" jdbcType="INTEGER"/>
+        <result property="mid" column="mid" jdbcType="INTEGER"/>
+        <result property="name" column="cat_name" jdbcType="VARCHAR"/>
+        <result property="priority" column="priority" jdbcType="INTEGER"/>
+        <collection property="commodities" ofType="xyz.qumn.lb.management.core.pojo.entity.Commodity"
+                    resultMap="Commodity"/>
+    </resultMap>
+
+    <resultMap id="Commodity" type="xyz.qumn.lb.management.core.pojo.entity.Commodity">
+        <result property="cid" column="cid"/>
+        <result property="catId" column="cat_id"/>
+        <result property="desc" column="desc"/>
+        <result property="img" column="img"/>
+        <result property="mid" column="mid"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="selectByMid" resultMap="CategoryMap">
+        select lcat.cat_id,
+               lcat.mid,
+               lcat.name as cat_name,
+               lcat.priority,
+               lc.cid,
+               lc.cat_id,
+               lc.`desc`,
+               lc.img,
+               lc.`name`,
+               lc.create_time,
+               lc.update_time
+        from lb_category lcat
+                 left join lb_commodity lc on lc.cat_id = lcat.cat_id
+        where lcat.mid = #{mid}
+    </select>
+
+</mapper>
+

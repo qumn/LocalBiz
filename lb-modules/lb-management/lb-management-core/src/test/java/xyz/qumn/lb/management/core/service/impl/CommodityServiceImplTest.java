@@ -1,27 +1,26 @@
 package xyz.qumn.lb.management.core.service.impl;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
-import org.locationtech.jts.index.hprtree.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import xyz.qumn.lb.management.core.dao.SpecificationDao;
-import xyz.qumn.lb.management.core.pojo.entity.SpecificationEntity;
+import org.springframework.transaction.annotation.Transactional;
+import xyz.qumn.lb.management.core.dao.SpecificationMapper;
+import xyz.qumn.lb.management.core.pojo.entity.Specification;
 
 import java.util.List;
 
 @SpringBootTest
 class CommodityServiceImplTest {
     @Autowired
-    SpecificationDao specificationDao;
+    SpecificationMapper specificationMapper;
 
     @Test
     @Transactional
     void deleteByCidShouldWork(){
         // why not working?
-        List<SpecificationEntity> specifications = specificationDao.queryByCid(1L);
+        List<Specification> specifications = specificationMapper.selectByCid(1L);
         specifications.forEach(specification -> {
-            specificationDao.deleteById(specification.getSid());
+            specificationMapper.deleteById(specification.getSid());
         });
     }
 

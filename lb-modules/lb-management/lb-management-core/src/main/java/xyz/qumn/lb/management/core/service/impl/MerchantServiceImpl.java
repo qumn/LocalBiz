@@ -7,8 +7,8 @@ import com.ruoyi.system.api.enums.UserType;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.qumn.lb.management.core.dao.MerchantDao;
-import xyz.qumn.lb.management.core.pojo.entity.MerchantEntity;
+import xyz.qumn.lb.management.core.dao.MerchantMapper;
+import xyz.qumn.lb.management.core.pojo.entity.Merchant;
 import xyz.qumn.lb.management.core.service.IMerchantService;
 
 import java.util.Objects;
@@ -19,10 +19,10 @@ public class MerchantServiceImpl implements IMerchantService {
     @Autowired
     RemoteUserService userService;
     @Autowired
-    MerchantDao merchantDao;
+    MerchantMapper merchantMapper;
 
     @Override
-    public void add(MerchantEntity merchant) {
+    public void add(Merchant merchant) {
         Long userId = SecurityUtils.getUserId();
         log.info("当前用户ID为：" + userId);
         // 切换当前用户类型为商家
@@ -35,6 +35,6 @@ public class MerchantServiceImpl implements IMerchantService {
             throw new RuntimeException("商家位置不能为空");
         }
         // 保存商家信息
-        merchantDao.save(merchant);
+        merchantMapper.insert(merchant);
     }
 }

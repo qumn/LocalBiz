@@ -4,18 +4,17 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.geolatte.geom.G2D;
-import org.geolatte.geom.Point;
+import org.locationtech.jts.geom.Geometry;
 
 import java.io.IOException;
 
-public class PointToJsonSerializer extends JsonSerializer<Point<G2D>> {
+public class PointToJsonSerializer extends JsonSerializer<Geometry> {
     @Override
-    public void serialize(Point value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
+    public void serialize(Geometry value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
         try {
             if (value != null) {
-                double lat = value.getPosition().getCoordinate(0);
-                double lon = value.getPosition().getCoordinate(1);
+                double lat = value.getCoordinate().getX();
+                double lon = value.getCoordinate().getY();
                 gen.writeStartObject();
                 gen.writeObjectField("x", lat);
                 gen.writeObjectField("y", lon);

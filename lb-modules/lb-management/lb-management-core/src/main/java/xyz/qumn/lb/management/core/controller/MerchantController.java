@@ -8,8 +8,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.qumn.lb.management.api.dto.MerchantDto;
-import xyz.qumn.lb.management.core.dao.MerchantDao;
-import xyz.qumn.lb.management.core.pojo.entity.MerchantEntity;
+import xyz.qumn.lb.management.core.converter.CommodityConverter;
+import xyz.qumn.lb.management.core.converter.MerchantConverter;
+import xyz.qumn.lb.management.core.dao.MerchantMapper;
+import xyz.qumn.lb.management.core.pojo.entity.Commodity;
+import xyz.qumn.lb.management.core.pojo.entity.Merchant;
 import xyz.qumn.lb.management.core.service.IMerchantService;
 
 import java.util.List;
@@ -18,17 +21,18 @@ import java.util.List;
 @RequestMapping("merchant")
 public class MerchantController extends BaseController {
     @Autowired
-    MerchantDao merchantDao;
+    MerchantMapper merchantMapper;
     @Autowired
     IMerchantService merchantService;
-
+    @Autowired
+    MerchantConverter merchantCvt;
     /**
      * 获取所有商户列表
      * @return
      */
     @GetMapping("/list")
     public AjaxResult list(){
-        return success(merchantDao.findAll());
+        return success(merchantMapper.selectList(null));
     }
 
     /**
@@ -36,21 +40,20 @@ public class MerchantController extends BaseController {
      * @return 商户列表
      */
     @GetMapping("/own")
-    public R<List<MerchantEntity>> getOwnMerchant() {
-        return R.ok(merchantDao.findByOwner(SecurityUtils.getUserId()));
+    public R<List<Merchant>> getOwnMerchant() {
+        return R.ok(merchantMapper.findByOwner(SecurityUtils.getUserId()));
     }
 
     /**
      * 添加商户
-     * @param merchant
+     * @param merchantDto
      * @return
      */
     @PostMapping
-    public AjaxResult add(@RequestBody MerchantDto merchant){
-        MerchantEntity merchantEntity = new MerchantEntity();
-        BeanUtils.copyProperties(merchant, merchantEntity);
-        merchantEntity.setOwner(SecurityUtils.getUserId());
-        merchantService.add(merchantEntity);
+    public AjaxResult add(@RequestBody MerchantDto merchantDto){
+        Merchant merchant = merchantCvt.dto2Entity(merchantDto);
+        merchant.setOwner(SecurityUtils.getUserId());
+        merchantService.add(merchant);
         return success();
     }
 
@@ -61,20 +64,20 @@ public class MerchantController extends BaseController {
      */
     @DeleteMapping("/{merchantId}")
     public AjaxResult delete(@PathVariable Long merchantId){
-        merchantDao.deleteById(merchantId);
+        merchantMapper.deleteById(merchantId);
         return AjaxResult.success();
     }
 
     /**
      * 更新商户信息
-     * @param merchantDao
+     * @param merchantMapper
      * @return
      */
     @PutMapping
-    public AjaxResult update(@RequestBody MerchantDao merchantDao){
-        MerchantEntity merchantEntity = new MerchantEntity();
-        BeanUtils.copyProperties(merchantDao, merchantEntity);
-        merchantDao.save(merchantEntity);
+    public AjaxResult update(@RequestBody MerchantMapper merchantMapper){
+        Merchant merchant = new Merchant();
+        BeanUtils.copyProperties(merchantMapper, merchant);
+        merchantMapper.insert(merchant);
         return AjaxResult.success();
     }
 }

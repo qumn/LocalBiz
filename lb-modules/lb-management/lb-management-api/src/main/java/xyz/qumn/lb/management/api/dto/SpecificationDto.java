@@ -1,10 +1,8 @@
 package xyz.qumn.lb.management.api.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Comment;
 
 import java.util.List;
 

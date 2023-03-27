@@ -3,27 +3,54 @@ package xyz.qumn.lb.management.core.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.qumn.lb.management.core.dao.CommodityDao;
-import xyz.qumn.lb.management.core.dao.SpecificationDao;
-import xyz.qumn.lb.management.core.pojo.entity.CommodityEntity;
+import xyz.qumn.lb.management.core.dao.CommodityMapper;
+import xyz.qumn.lb.management.core.dao.SpecificationAttributeMapper;
+import xyz.qumn.lb.management.core.dao.SpecificationMapper;
+import xyz.qumn.lb.management.core.pojo.entity.Commodity;
+import xyz.qumn.lb.management.core.pojo.entity.Specification;
+import xyz.qumn.lb.management.core.pojo.entity.SpecificationAttribute;
 import xyz.qumn.lb.management.core.service.ICommodityService;
+
+import java.util.List;
 
 @Service
 public class CommodityServiceImpl implements ICommodityService {
     @Autowired
-    CommodityDao commodityDao;
+    CommodityMapper commodityMapper;
     @Autowired
-    SpecificationDao specificationDao;
+    SpecificationMapper specificationMapper;
+    @Autowired
+    SpecificationAttributeMapper attributeMapper;
     @Override
-    public Long save(CommodityEntity commodityEntity) {
-        return commodityDao.save(commodityEntity).getCid();
+    @Transactional
+    public Long save(Commodity commodity) {
+        commodityMapper.insert(commodity);
+        cascadeSave(commodity);
+        return commodity.getCid();
     }
 
     @Override
     @Transactional
-    public void update(CommodityEntity commodity){
+    public void update(Commodity commodity){
+        commodityMapper.updateById(commodity);
         Long cid = commodity.getCid();
-        specificationDao.deleteAllByCid(cid);
-        save(commodity);
+        List<Specification> specifications = specificationMapper.selectByCid(cid);
+        List<Long> sids = specifications.stream().map(Specification::getSid).toList();
+        attributeMapper.deleteBatchSids(sids);
+        specificationMapper.deleteAllByCid(cid);
+        cascadeSave(commodity);
+    }
+
+
+    private void cascadeSave(Commodity commodity) {
+        Long cid = commodity.getCid();
+        List<Specification> specifications = commodity.getSpecifications();
+        specifications.forEach(spec -> spec.setCid(cid));
+        specificationMapper.insertBatch(commodity.getSpecifications());
+        for (Specification specification : specifications) {
+            List<SpecificationAttribute> attributes = specification.getAttributes();
+            attributes.forEach(attr -> attr.setSid(specification.getSid()));
+            attributeMapper.insertBatch(attributes);
+        }
     }
 }

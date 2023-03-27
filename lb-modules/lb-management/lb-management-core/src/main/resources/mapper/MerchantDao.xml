@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.qumn.lb.management.core.dao.MerchantMapper">
+
+    <resultMap type="xyz.qumn.lb.management.core.pojo.entity.Merchant" id="MerchantMap">
+        <result property="mid" column="mid"/>
+        <result property="desc" column="desc"/>
+        <result property="geom" column="geom" typeHandler="xyz.qumn.lb.management.core.mybatis.GeometryTypeHandler"/>
+        <result property="geomDesc" column="geom_desc"/>
+        <result property="introImg" column="intro_img"/>
+        <result property="name" column="name"/>
+        <result property="owner" column="owner"/>
+        <result property="phone" column="phone"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="findByOwner" resultMap="MerchantMap">
+        SELECT mid,
+               `name`,
+               owner,
+               phone,
+               intro_img,
+               geom,
+               geom_desc,
+               `desc`,
+               create_time,
+               update_time
+        FROM lb_merchant
+        WHERE owner = #{owner}
+    </select>
+    <select id="findByMidAndName" resultType="xyz.qumn.lb.management.core.pojo.entity.Merchant">
+        SELECT mid,
+               `name`,
+               owner,
+               phone,
+               intro_img,
+               geom,
+               geom_desc,
+               `desc`,
+               create_time,
+               update_time
+        FROM lb_merchant
+        <where>
+            <if test="mid != null">
+                and mid = #{mid}
+            </if>
+            <if test="name != null">
+                AND `name` = #{name}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
+

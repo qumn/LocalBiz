@@ -5,7 +5,7 @@ import org.mapstruct.*;
 import xyz.qumn.lb.management.api.dto.CategoryDto;
 import xyz.qumn.lb.management.api.request.category.CategoryCreateRequest;
 import xyz.qumn.lb.management.api.request.category.CategoryUpdateRequest;
-import xyz.qumn.lb.management.core.pojo.entity.CategoryEntity;
+import xyz.qumn.lb.management.core.pojo.entity.Category;
 
 import java.util.List;
 
@@ -13,18 +13,18 @@ import java.util.List;
 public interface CategoryConverter {
 
     @Named("entity2Dto")
-    CategoryDto entity2Dto(CategoryEntity category);
+    CategoryDto entity2Dto(Category category);
 
     @Mappings({
             @Mapping(target = "commodities", ignore = true)
     })
-    CategoryDto entity2DtoWithOutCommodities(CategoryEntity category);
+    CategoryDto entity2DtoWithOutCommodities(Category category);
 
 
     @IterableMapping(qualifiedByName = "entity2Dto")
-    List<CategoryDto> entity2Dtos(List<CategoryEntity> entities);
+    List<CategoryDto> entity2Dtos(List<Category> entities);
 
-    CategoryEntity req2Entity(CategoryCreateRequest category);
+    Category req2Entity(CategoryCreateRequest category);
 
-    CategoryEntity req2Entity(CategoryUpdateRequest category);
+    Category req2Entity(CategoryUpdateRequest category);
 }

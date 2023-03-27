@@ -8,8 +8,8 @@ import xyz.qumn.lb.management.api.dto.CategoryDto;
 import xyz.qumn.lb.management.api.request.category.CategoryCreateRequest;
 import xyz.qumn.lb.management.api.request.category.CategoryUpdateRequest;
 import xyz.qumn.lb.management.core.converter.CategoryConverter;
-import xyz.qumn.lb.management.core.dao.CategoryDao;
-import xyz.qumn.lb.management.core.pojo.entity.CategoryEntity;
+import xyz.qumn.lb.management.core.dao.CategoryMapper;
+import xyz.qumn.lb.management.core.pojo.entity.Category;
 
 import java.util.List;
 
@@ -18,32 +18,32 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    CategoryDao categoryDao;
+    CategoryMapper categoryMapper;
     @Autowired
     CategoryConverter categoryConverter;
 
     @GetMapping("/list/{mid}")
     public R<List<CategoryDto>> list(@PathVariable("mid") Long mid) {
-        return R.ok(categoryConverter.entity2Dtos(categoryDao.findByMid(mid)));
+        return R.ok(categoryConverter.entity2Dtos(categoryMapper.selectByMid(mid)));
     }
 
     @PostMapping
     public R<Void> save(@RequestBody CategoryCreateRequest category) {
-        CategoryEntity categoryEntity = categoryConverter.req2Entity(category);
-        categoryDao.save(categoryEntity);
+        Category categoryEntity = categoryConverter.req2Entity(category);
+        categoryMapper.insert(categoryEntity);
         return R.ok();
     }
 
     @DeleteMapping("/{cid}")
     public R<Void> delete(@PathVariable("cid") Long cid) {
-        categoryDao.deleteById(cid);
+        categoryMapper.deleteById(cid);
         return R.ok();
     }
 
     @PutMapping
     public R<Void> update(@RequestBody CategoryUpdateRequest category) {
-        CategoryEntity categoryEntity = categoryConverter.req2Entity(category);
-        categoryDao.save(categoryEntity);
+        Category categoryEntity = categoryConverter.req2Entity(category);
+        categoryMapper.insert(categoryEntity);
         return R.ok();
     }
 }

@@ -5,8 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.geolatte.geom.G2D;
-import org.geolatte.geom.Point;
+import org.locationtech.jts.geom.Geometry;
 import xyz.qumn.lb.management.api.serializer.JsonToPointDeserializer;
 import xyz.qumn.lb.management.api.serializer.PointToJsonSerializer;
 
@@ -24,7 +23,7 @@ public class MerchantDto {
     String introImg;
     @JsonSerialize(using = PointToJsonSerializer.class)
     @JsonDeserialize(using = JsonToPointDeserializer.class)
-    Point<G2D> geom;
+    Geometry geom;
     String geomDesc;
     String phone;
     Date createTime;

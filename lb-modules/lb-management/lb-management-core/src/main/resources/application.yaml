@@ -2,10 +2,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-#    show-sql: true
+  #    show-sql: true
   #    properties:
-#      hibernate.dialect: org.hibernate.spatial.dialect.mysql.MySQL8SpatialDialect
-#    database-platform: org.hibernate.spatial.dialect.mysql.MySQL8SpatialDialect
+  #      hibernate.dialect: org.hibernate.spatial.dialect.mysql.MySQL8SpatialDialect
+  #    database-platform: org.hibernate.spatial.dialect.mysql.MySQL8SpatialDialect
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3305/ruoyi-cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
@@ -14,9 +14,9 @@ spring:
   application:
     # 应用名称
     name: lb-management
-#  profiles:
-#    # 环境配置
-#    active: dev
+  #  profiles:
+  #    # 环境配置
+  #    active: dev
   cloud:
     nacos:
       discovery:
@@ -24,14 +24,31 @@ spring:
         server-addr: 127.0.0.1:8848
   main:
     allow-circular-references: true
-#      config:
-#        # 配置中心地址
-#        server-addr: 127.0.0.1:8848
-#        # 配置文件格式
-#        file-extension: yml
-#        # 共享配置
-#        shared-configs:
-#          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  #      config:
+  #        # 配置中心地址
+  #        server-addr: 127.0.0.1:8848
+  #        # 配置文件格式
+  #        file-extension: yml
+  #        # 共享配置
+  #        shared-configs:
+  #          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  flyway:
+    # 是否启用flyway
+    enabled: true
+    # 编码格式，默认UTF-8
+    encoding: UTF-8
+    # 迁移sql脚本文件存放路径，默认db/migration
+    locations: classpath:db/migration
+    # 迁移sql脚本文件名称的前缀，默认V
+    sql-migration-prefix: V
+    # 迁移sql脚本文件名称的分隔符，默认2个下划线__
+    sql-migration-separator: __
+    # 迁移sql脚本文件名称的后缀
+    sql-migration-suffixes: .sql
+    # 迁移时是否进行校验，默认true
+    validate-on-migrate: true
+    # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
+    baseline-on-migrate: true
 server:
   port: 8800
 logging:

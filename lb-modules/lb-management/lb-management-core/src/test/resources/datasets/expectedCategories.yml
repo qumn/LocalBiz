@@ -1,0 +1,5 @@
+lb_category:
+  - cat_id: 2
+    mid: 1
+    name: "cat name2"
+    priority: 2

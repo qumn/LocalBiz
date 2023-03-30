@@ -3,3 +3,7 @@ lb_category:
     mid: 1
     name: "cat name2"
     priority: 2
+  - cat_id: 3
+    mid: 2
+    name: "cat name3"
+    priority: 1

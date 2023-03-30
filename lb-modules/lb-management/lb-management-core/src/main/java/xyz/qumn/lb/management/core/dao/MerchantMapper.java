@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface MerchantMapper extends BaseMapper<Merchant> {
 
-    List<Merchant> findByMidAndName(Long mid, String name);
+    List<Merchant> selectByMidAndName(Long mid, String name);
 
-    List<Merchant> findByOwner(Long owner);
+    List<Merchant> selectByOwner(Long owner);
 }

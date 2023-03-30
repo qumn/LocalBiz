@@ -14,7 +14,7 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="findByOwner" resultMap="MerchantMap">
+    <select id="selectByOwner" resultMap="MerchantMap">
         SELECT mid,
                `name`,
                owner,
@@ -28,7 +28,7 @@
         FROM lb_merchant
         WHERE owner = #{owner}
     </select>
-    <select id="findByMidAndName" resultType="xyz.qumn.lb.management.core.pojo.entity.Merchant">
+    <select id="selectByMidAndName" resultType="xyz.qumn.lb.management.core.pojo.entity.Merchant">
         SELECT mid,
                `name`,
                owner,

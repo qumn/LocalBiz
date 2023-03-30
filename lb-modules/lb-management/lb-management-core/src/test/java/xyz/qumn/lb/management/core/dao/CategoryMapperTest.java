@@ -1,20 +1,41 @@
 package xyz.qumn.lb.management.core.dao;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import xyz.qumn.lb.management.core.pojo.entity.Category;
 
 import java.util.List;
 
-@SpringBootTest
-class CategoryMapperTest {
-    @Autowired
-    CategoryMapper categoryMapper;
-    @Test
-    void selectShouldWork(){
-        List<Category> categories = categoryMapper.selectByMid(1L);
-        System.out.println(categories);
+import static org.assertj.core.api.Assertions.assertThat;
+
+@RunWith(JUnit4.class)
+public class CategoryMapperTest extends BaseDaoTest {
+
+    CategoryMapper categoryMp;
+
+    @Before
+    public void init() {
+        categoryMp = ssProvide.getMapper(CategoryMapper.class);
     }
 
+    @Test
+    @DataSet("categories.yml")
+    public void shouldWorkedSelectByMid() {
+        List<Category> categories = categoryMp.selectByMid(1L);
+        assert categories.size() == 2;
+    }
+
+    @Test
+    @DataSet("categories.yml")
+    @ExpectedDataSet("expected/categories.yml")
+    public void shouldAssertDataBaseUsingExpectedDataSet() {
+        Category category = categoryMp.selectById(1L);
+        assertThat(category).isNotNull();
+        categoryMp.deleteById(1L);
+        ssProvide.commit();
+    }
 }

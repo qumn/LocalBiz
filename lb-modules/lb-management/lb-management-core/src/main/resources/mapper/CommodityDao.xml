@@ -48,9 +48,9 @@
                lcsa.`key`,
                lcsa.value
         from lb_commodity c
-                 join lb_category lcat on lcat.cat_id = c.cat_id
-                 join lb_commodity_spc lcs on c.cid = lcs.cid
-                 join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
+                 left join lb_category lcat on lcat.cat_id = c.cat_id
+                 left join lb_commodity_spc lcs on c.cid = lcs.cid
+                 left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
     </sql>
 
     <select id="selectByMid" resultMap="CommodityMap">

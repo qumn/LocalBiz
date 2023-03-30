@@ -2,6 +2,10 @@ package xyz.qumn.lb.management.core.util;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder;
+import com.baomidou.mybatisplus.core.MybatisXMLConfigBuilder;
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
@@ -9,8 +13,11 @@ import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.junit.BeforeClass;
+import org.locationtech.jts.geom.Geometry;
 import xyz.qumn.lb.management.core.dao.BaseDaoTest;
+import xyz.qumn.lb.management.core.mybatis.GeometryTypeHandler;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -76,11 +83,19 @@ public class MybatisPlusUtil {
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
         Environment environment = new Environment("Production", transactionFactory, getDataSource());
         MybatisConfiguration conf = new MybatisConfiguration(environment);
+        registryMapperXml(conf, "mapper");
         initConfiguration(conf);
         conf.setLogImpl(StdOutImpl.class);
         conf.addMappers(DAO_PACKAGE);
-        registryMapperXml(conf, "categoryMp");
+        conf.addInterceptor(new MybatisPlusInterceptor());
+        registerTypeHandler(conf);
+        GlobalConfigUtils.getGlobalConfig(conf).setIdentifierGenerator(new DefaultIdentifierGenerator());
         SQL_SESSION_FACTORY = new MybatisSqlSessionFactoryBuilder().build(conf);
+    }
+
+    private static void registerTypeHandler(MybatisConfiguration conf){
+        TypeHandlerRegistry typeHandlerRegistry = conf.getTypeHandlerRegistry();
+        typeHandlerRegistry.register(Geometry.class, GeometryTypeHandler.class);
     }
 
     private static void initConfiguration(MybatisConfiguration configuration) {

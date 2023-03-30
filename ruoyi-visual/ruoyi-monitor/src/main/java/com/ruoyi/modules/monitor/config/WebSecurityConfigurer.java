@@ -32,11 +32,12 @@ public class WebSecurityConfigurer
         return httpSecurity
                 .headers().frameOptions().disable()
                 .and().authorizeRequests()
-                .antMatchers(adminContextPath + "/assets/**"
-                        , adminContextPath + "/login"
-                        , adminContextPath + "/actuator/**"
-                        , adminContextPath + "/instances/**"
-                ).permitAll()
+//                .antMatchers(adminContextPath + "/assets/**"
+//                        , adminContextPath + "/login"
+//                        , adminContextPath + "/actuator/**"
+//                        , adminContextPath + "/instances/**"
+//                )
+//                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage(adminContextPath + "/login")

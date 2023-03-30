@@ -7,11 +7,13 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import xyz.qumn.lb.management.core.util.MybatisPlusUtil;
 
+import java.sql.Connection;
+
 
 // 每一个测试方法都会创建一个新的SqlSession
 public class SqlSessionProvider implements TestRule {
     private final static SqlSessionFactory ssf = MybatisPlusUtil.getSqlSessionFactory();
-    private SqlSession sqlSession;
+    private SqlSession sqlSession; // one session per test method
 
     @Override
     public Statement apply(Statement base, Description description) {

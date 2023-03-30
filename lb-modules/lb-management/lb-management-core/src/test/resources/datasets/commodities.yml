@@ -1,0 +1,41 @@
+lb_commodity:
+  - cid: 1
+    mid: 1
+    cat_id: 1
+    desc: "desc1"
+    img: "img1"
+    name: "commodity1"
+    create_time: "2023-03-30 17:26:12.323193"
+    update_time: "2023-03-30 17:26:12.323171"
+  - cid: 2
+    mid: 1
+    cat_id: 1
+    desc: "desc2"
+    img: "img2"
+    name: "commodity2"
+    create_time: "2023-03-30 17:26:12.323203"
+    update_time: "2023-03-30 17:26:12.3232"
+  - cid: 3
+    mid: 1
+    cat_id: 2
+    desc: "desc3"
+    img: "img3"
+    name: "commodity3"
+    create_time: "2023-03-30 17:26:12.32321"
+    update_time: "2023-03-30 17:26:12.323208"
+  - cid: 4
+    mid: 1
+    cat_id: 2
+    desc: "desc4"
+    img: "img4"
+    name: "commodity4"
+    create_time: "2023-03-30 17:26:12.323215"
+    update_time: "2023-03-30 17:26:12.323213"
+  - cid: 5
+    mid: 2
+    cat_id: 2
+    desc: "desc5"
+    img: "img5"
+    name: "commodity5"
+    create_time: "2023-03-30 17:26:12.323221"
+    update_time: "2023-03-30 17:26:12.323219"

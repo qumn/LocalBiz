@@ -1,0 +1,52 @@
+flyway_schema_history:
+
+lb_category:
+
+lb_commodity:
+  - cid: 36
+    cat_id: 1
+    create_time: "2023-03-30 21:59:24.324416"
+    desc: "desc1"
+    img: "img1"
+    mid: 1
+    name: "commodity1"
+    update_time: "2023-03-30 21:59:24.324395"
+  - cid: 37
+    cat_id: 1
+    create_time: "2023-03-30 21:59:24.324426"
+    desc: "desc2"
+    img: "img2"
+    mid: 1
+    name: "commodity2"
+    update_time: "2023-03-30 21:59:24.324423"
+  - cid: 38
+    cat_id: 2
+    create_time: "2023-03-30 21:59:24.324432"
+    desc: "desc3"
+    img: "img3"
+    mid: 1
+    name: "commodity3"
+    update_time: "2023-03-30 21:59:24.32443"
+  - cid: 39
+    cat_id: 2
+    create_time: "2023-03-30 21:59:24.324438"
+    desc: "desc4"
+    img: "img4"
+    mid: 1
+    name: "commodity4"
+    update_time: "2023-03-30 21:59:24.324436"
+  - cid: 40
+    cat_id: 2
+    create_time: "2023-03-30 21:59:24.324444"
+    desc: "desc5"
+    img: "img5"
+    mid: 2
+    name: "commodity5"
+    update_time: "2023-03-30 21:59:24.324442"
+
+lb_commodity_spc:
+
+lb_commodity_spc_atb:
+
+lb_merchant:
+

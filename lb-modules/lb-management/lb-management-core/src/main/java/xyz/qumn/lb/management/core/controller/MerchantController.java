@@ -8,10 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.qumn.lb.management.api.dto.MerchantDto;
-import xyz.qumn.lb.management.core.converter.CommodityConverter;
 import xyz.qumn.lb.management.core.converter.MerchantConverter;
 import xyz.qumn.lb.management.core.dao.MerchantMapper;
-import xyz.qumn.lb.management.core.pojo.entity.Commodity;
 import xyz.qumn.lb.management.core.pojo.entity.Merchant;
 import xyz.qumn.lb.management.core.service.IMerchantService;
 
@@ -41,7 +39,7 @@ public class MerchantController extends BaseController {
      */
     @GetMapping("/own")
     public R<List<Merchant>> getOwnMerchant() {
-        return R.ok(merchantMapper.findByOwner(SecurityUtils.getUserId()));
+        return R.ok(merchantMapper.selectByOwner(SecurityUtils.getUserId()));
     }
 
     /**

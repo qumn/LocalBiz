@@ -28,11 +28,18 @@
         where cid = #{cid}
     </delete>
 
-    <select id="selectByCid" resultType="xyz.qumn.lb.management.core.pojo.entity.Specification">
+    <select id="selectByCid" resultMap="CommoditySpcMap">
         select lcs.sid, lcs.cid, lcs.price, lcsa.aid, lcsa.key, lcsa.value
         from lb_commodity_spc lcs
                  left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
         where lcs.cid = #{cid}
+    </select>
+
+    <select id="selectById" resultMap="CommoditySpcMap">
+        select lcs.sid, lcs.cid, lcs.price, lcsa.aid, lcsa.key, lcsa.value
+        from lb_commodity_spc lcs
+                 left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
+        where lcs.sid = #{id}
     </select>
 
 

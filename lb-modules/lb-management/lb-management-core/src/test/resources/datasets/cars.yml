@@ -1,0 +1,19 @@
+lb_car:
+  - car_id: 1
+    user_id: 100
+    mid: 1
+    cid: 1
+    sid: 1
+    count: 2
+    status: 'SELECTED'
+    create_time: 2016-01-01 00:00:00
+    update_time: 2016-01-01 00:00:00
+  - car_id: 2
+    user_id: 100
+    mid: 1
+    cid: 2
+    sid: 1
+    count: 1
+    status: 'SELECTED'
+    create_time: 2016-01-01 00:00:00
+    update_time: 2016-01-01 00:00:00

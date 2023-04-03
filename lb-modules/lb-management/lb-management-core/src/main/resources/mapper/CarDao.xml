@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.qumn.lb.management.core.dao.CarMapper">
+
+    <resultMap type="xyz.qumn.lb.management.core.pojo.entity.Car" id="CarMap">
+        <result property="carId" column="car_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="mid" column="mid"/>
+        <result property="cid" column="cid"/>
+        <result property="sid" column="sid"/>
+        <result property="count" column="count"/>
+        <result property="status" column="status" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result property="createTime" column="car_create_time"/>
+        <result property="updateTime" column="car_update_time"/>
+        <association property="specification"
+                     resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.specification"/>
+        <association property="commodity" resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.CommodityMap">
+        </association>
+    </resultMap>
+    <sql id="selectCar">
+        SELECT lcar.car_id,
+               lcar.user_id,
+               lcar.mid,
+               lcar.cid,
+               lcar.sid,
+               lcar.count,
+               lcar.STATUS,
+               lcar.create_time car_create_time,
+               lcar.update_time car_update_time,
+               lc.cat_id,
+               lc.`desc`,
+               lc.img,
+               lc.`name`,
+               lc.create_time,
+               lc.update_time,
+               lcs.price,
+               lcsa.aid,
+               lcsa.`key`,
+               lcsa.`VALUE`
+        FROM lb_car lcar
+                 LEFT JOIN lb_commodity lc ON lcar.cid = lc.cid
+                 LEFT JOIN lb_commodity_spc lcs ON lcar.sid = lcs.sid
+                 LEFT JOIN lb_commodity_spc_atb lcsa ON lcsa.sid = lcs.sid
+    </sql>
+    <select id="selectByUserId" resultMap="CarMap">
+        <include refid="selectCar"/>
+        where lc.user_id = #{userId}
+    </select>
+    <select id="selectById" resultMap="CarMap">
+        <include refid="selectCar"/>
+        where lcar.car_id = #{carId}
+    </select>
+
+</mapper>
+

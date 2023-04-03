@@ -2,7 +2,6 @@ package xyz.qumn.lb.management.core.util;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder;
-import com.baomidou.mybatisplus.core.MybatisXMLConfigBuilder;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -13,6 +12,7 @@ import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.apache.ibatis.type.EnumTypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.junit.BeforeClass;
 import org.locationtech.jts.geom.Geometry;
@@ -93,9 +93,10 @@ public class MybatisPlusUtil {
         SQL_SESSION_FACTORY = new MybatisSqlSessionFactoryBuilder().build(conf);
     }
 
-    private static void registerTypeHandler(MybatisConfiguration conf){
+    private static void registerTypeHandler(MybatisConfiguration conf) {
         TypeHandlerRegistry typeHandlerRegistry = conf.getTypeHandlerRegistry();
         typeHandlerRegistry.register(Geometry.class, GeometryTypeHandler.class);
+        typeHandlerRegistry.register(Enum.class, EnumTypeHandler.class);
     }
 
     private static void initConfiguration(MybatisConfiguration configuration) {

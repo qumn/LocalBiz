@@ -1,12 +1,12 @@
 create table if not exists lb_commodity
 (
     cid         bigint       not null primary key auto_increment,
+    `name`        varchar(255) null comment '商品名称',
     cat_id      bigint       null comment '分类id',
-    create_time datetime(6)  null comment '创建时间',
-    `desc`      varchar(255) null comment '商品简介',
     img         varchar(255) null comment '商品图片',
+    `desc`      varchar(255) null comment '商品简介',
     mid         bigint       null comment '商店id',
-    name        varchar(255) null comment '商品名称',
+    create_time datetime(6)  null comment '创建时间',
     update_time datetime(6)  null comment '修改时间'
 );
 

@@ -26,6 +26,7 @@
         <result property="price" column="price"/>
         <collection property="attributes" ofType="xyz.qumn.lb.management.core.pojo.entity.SpecificationAttribute">
             <id property="aid" column="aid" jdbcType="INTEGER"/>
+            <result property="sid" column="sid"/>
             <result property="key" column="key" jdbcType="VARCHAR"/>
             <result property="value" column="value" jdbcType="VARCHAR"/>
         </collection>

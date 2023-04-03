@@ -1,0 +1,19 @@
+lb_commodity_spc:
+  - sid: 1
+    cid: 1
+    price: 100
+  - sid: 2
+    cid: 1
+    price: 200
+  - sid: 3
+    cid: 1
+    price: 300
+  - sid: 4
+    cid: 2
+    price: 400
+  - sid: 5
+    cid: 2
+    price: 500
+  - sid: 6
+    cid: 3
+    price: 600

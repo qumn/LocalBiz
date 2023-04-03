@@ -53,6 +53,7 @@ public class BaseDaoTest {
                     ClassicConfiguration conf = new ClassicConfiguration();
                     conf.setDataSource(dataSource);
                     Flyway flyway = new Flyway(conf);
+                    flyway.baseline();
                     flyway.migrate();
                     Initialed = true;
                 }

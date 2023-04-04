@@ -6,7 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import xyz.qumn.lb.management.core.pojo.entity.Specification;
+import xyz.qumn.lb.management.core.pojo.entity.SpecificationAttribute;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,10 +17,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SpecificationMapperTest extends BaseDaoTest {
 
     SpecificationMapper specMp;
+    SpecificationAttributeMapper specAttrMp;
 
     @Before
     public void init() {
         specMp = getSession().getMapper(SpecificationMapper.class);
+        specAttrMp = getSession().getMapper(SpecificationAttributeMapper.class);
     }
 
     @Test
@@ -38,6 +42,16 @@ public class SpecificationMapperTest extends BaseDaoTest {
                 .isNotNull();
         assertThat(spec.getAttributes())
                 .hasSize(3);
+    }
+
+    @Test
+    @DataSet(value = {"specifications.yml", "attributes.yml"})
+    public void shouldWorkDelete() {
+        List<Long> ids = Arrays.asList(1L, 2L, 3L, 4L);
+        specAttrMp.deleteBatchSids(ids);
+        List<SpecificationAttribute> attrs = specAttrMp.selectList(null);
+        assertThat(attrs)
+                .hasSize(2);
     }
 
 }

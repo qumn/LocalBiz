@@ -37,12 +37,11 @@
     </insert>
 
     <delete id="deleteBatchSids">
-        <if test="sids != null and sids.size() != 0">
-            delete from lb_commodity_spc_atb where sid in
-            <foreach collection="sids" item="sid" open="(" close=")" separator=",">
-                #{sid}
-            </foreach>
-        </if>
+        delete from lb_commodity_spc_atb
+        where sid in
+        <foreach collection="sids" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
     </delete>
 </mapper>
 

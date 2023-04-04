@@ -21,6 +21,7 @@ public class CommodityServiceImpl implements ICommodityService {
     SpecificationMapper specificationMapper;
     @Autowired
     SpecificationAttributeMapper attributeMapper;
+
     @Override
     @Transactional
     public Long save(Commodity commodity) {
@@ -31,12 +32,13 @@ public class CommodityServiceImpl implements ICommodityService {
 
     @Override
     @Transactional
-    public void update(Commodity commodity){
+    public void update(Commodity commodity) {
         commodityMapper.updateById(commodity);
         Long cid = commodity.getCid();
         List<Specification> specifications = specificationMapper.selectByCid(cid);
         List<Long> sids = specifications.stream().map(Specification::getSid).toList();
-        attributeMapper.deleteBatchSids(sids);
+        if (sids.size() != 0)
+            attributeMapper.deleteBatchSids(sids);
         specificationMapper.deleteAllByCid(cid);
         cascadeSave(commodity);
     }
@@ -46,7 +48,8 @@ public class CommodityServiceImpl implements ICommodityService {
         Long cid = commodity.getCid();
         List<Specification> specifications = commodity.getSpecifications();
         specifications.forEach(spec -> spec.setCid(cid));
-        specificationMapper.insertBatch(commodity.getSpecifications());
+        if (commodity.getSpecifications().size() != 0)
+            specificationMapper.insertBatch(commodity.getSpecifications());
         for (Specification specification : specifications) {
             List<SpecificationAttribute> attributes = specification.getAttributes();
             attributes.forEach(attr -> attr.setSid(specification.getSid()));

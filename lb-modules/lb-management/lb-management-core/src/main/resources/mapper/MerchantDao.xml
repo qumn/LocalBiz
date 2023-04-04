@@ -5,7 +5,7 @@
     <resultMap type="xyz.qumn.lb.management.core.pojo.entity.Merchant" id="MerchantMap">
         <result property="mid" column="mid"/>
         <result property="desc" column="desc"/>
-        <result property="geom" column="geom" typeHandler="xyz.qumn.lb.management.core.mybatis.GeometryTypeHandler"/>
+        <result property="geom" column="geom" typeHandler="xyz.qumn.lb.common.mybatis.GeometryTypeHandler"/>
         <result property="geomDesc" column="geom_desc"/>
         <result property="introImg" column="intro_img"/>
         <result property="name" column="name"/>

@@ -8,7 +8,6 @@
         <version>3.0.2</version>
     </parent>
 
-    <groupId>xyz.qumn</groupId>
     <artifactId>lb-management-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -16,7 +15,6 @@
     <description>lz-management-api</description>
     <properties>
         <java.version>17</java.version>
-        <spring-cloud.version>2022.0.1</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -35,7 +33,6 @@
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2</artifactId>
-            <version>2.0.23</version>
         </dependency>
         <dependency>
             <groupId>org.locationtech.jts.io</groupId>

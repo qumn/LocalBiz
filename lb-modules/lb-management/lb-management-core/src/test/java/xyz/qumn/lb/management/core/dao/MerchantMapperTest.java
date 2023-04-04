@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
+import xyz.qumn.lb.common.mybatis.test.dao.BaseDaoTest;
 import xyz.qumn.lb.management.core.pojo.entity.Merchant;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class MerchantMapperTest extends BaseDaoTest {
                 .hasSize(2);
         assertThat(merchants.get(0).getGeom()).isNotNull();
     }
+
     @Test
     @DataSet("merchants.yml")
     public void shouldWorkSelectByOwnerId3() {
@@ -40,6 +42,7 @@ public class MerchantMapperTest extends BaseDaoTest {
                 .hasSize(2);
         assertThat(merchants.get(0).getGeom()).isNotNull();
     }
+
     @Test
     @DataSet("merchants.yml")
     public void shouldWorkSelectByOwnerId2() {
@@ -48,6 +51,7 @@ public class MerchantMapperTest extends BaseDaoTest {
                 .hasSize(2);
         assertThat(merchants.get(0).getGeom()).isNotNull();
     }
+
     @Test
     @DataSet("merchants.yml")
     public void shouldWorkSelectByOwnerId5() {

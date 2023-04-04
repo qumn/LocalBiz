@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import xyz.qumn.lb.common.mybatis.test.dao.BaseDaoTest;
 import xyz.qumn.lb.management.core.pojo.entity.Category;
 
 import java.util.List;

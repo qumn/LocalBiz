@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Geometry;
+import xyz.qumn.lb.common.mybatis.GeometryTypeHandler;
 import xyz.qumn.lb.management.api.serializer.JsonToPointDeserializer;
 import xyz.qumn.lb.management.api.serializer.PointToJsonSerializer;
-import xyz.qumn.lb.management.core.mybatis.GeometryTypeHandler;
 
 import java.time.LocalDateTime;
 

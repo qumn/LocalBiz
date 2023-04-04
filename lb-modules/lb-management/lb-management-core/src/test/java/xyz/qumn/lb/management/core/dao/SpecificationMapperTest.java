@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import xyz.qumn.lb.common.mybatis.test.dao.BaseDaoTest;
 import xyz.qumn.lb.management.core.pojo.entity.Specification;
 import xyz.qumn.lb.management.core.pojo.entity.SpecificationAttribute;
 

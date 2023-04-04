@@ -15,6 +15,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>lb-management</module>
+        <module>lb-client</module>
+        <module>lb-common</module>
     </modules>
 
     <properties>
@@ -30,6 +32,7 @@
         <mybatis.plus.version>3.5.3</mybatis.plus.version>
         <jts.version>1.13</jts.version>
         <jts.io.common>1.19.0</jts.io.common>
+        <fastjson.version>2.0.23</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -53,6 +56,26 @@
             <dependency>
                 <groupId>xyz.qumn</groupId>
                 <artifactId>lb-management-api</artifactId>
+                <version>${lb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.qumn</groupId>
+                <artifactId>lb-common</artifactId>
+                <version>${lb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.qumn</groupId>
+                <artifactId>lb-management-core</artifactId>
+                <version>${lb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.qumn</groupId>
+                <artifactId>lb-client-api</artifactId>
+                <version>${lb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.qumn</groupId>
+                <artifactId>lb-client-core</artifactId>
                 <version>${lb.version}</version>
             </dependency>
             <dependency>
@@ -92,6 +115,11 @@
                 <groupId>org.locationtech.jts.io</groupId>
                 <artifactId>jts-io-common</artifactId>
                 <version>${jts.io.common}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
 

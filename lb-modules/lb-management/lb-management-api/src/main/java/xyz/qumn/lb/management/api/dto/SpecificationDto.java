@@ -14,4 +14,5 @@ public class SpecificationDto {
     Long sid;
     Integer price;
     List<SpecificationAttributeDto> attributes;
+    CommodityDto commodity;
 }

@@ -27,7 +27,7 @@ public class SpecificationMapperTest extends BaseDaoTest {
     }
 
     @Test
-    @DataSet(value = {"specifications.yml", "attributes.yml", "merchants.yml"})
+    @DataSet(value = {"specifications.yml", "attributes.yml", "commodities.yml", "merchants.yml"})
     public void shouldWorkSelectByCid() {
         List<Specification> specifications = specMp.selectByCid(1L);
         assertThat(specifications)
@@ -53,6 +53,19 @@ public class SpecificationMapperTest extends BaseDaoTest {
         List<SpecificationAttribute> attrs = specAttrMp.selectList(null);
         assertThat(attrs)
                 .hasSize(2);
+    }
+
+    @Test
+    @DataSet(value = {"specifications.yml", "attributes.yml", "commodities.yml", "merchants.yml"})
+    public void shouldWorkSelectById(){
+        Specification spec = specMp.selectById(1L);
+        assertThat(spec)
+                .isNotNull();
+        assertThat(spec.getAttributes())
+                .hasSize(3);
+        assertThat(spec.getCommodity())
+                .isNotNull();
+        System.out.println(spec);
     }
 
 }

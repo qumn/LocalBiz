@@ -10,7 +10,7 @@ import xyz.qumn.lb.management.core.pojo.entity.SpecificationAttribute;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CommodityConverter.class})
 public interface SpecificationConverter {
     SpecificationDto entity2Dto(Specification specification);
 

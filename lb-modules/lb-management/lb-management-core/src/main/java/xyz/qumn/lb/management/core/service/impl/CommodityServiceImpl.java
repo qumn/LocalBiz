@@ -45,6 +45,7 @@ public class CommodityServiceImpl implements ICommodityService {
 
 
     private void cascadeSave(Commodity commodity) {
+        // TODO: specification id 变化问题
         Long cid = commodity.getCid();
         List<Specification> specifications = commodity.getSpecifications();
         specifications.forEach(spec -> spec.setCid(cid));

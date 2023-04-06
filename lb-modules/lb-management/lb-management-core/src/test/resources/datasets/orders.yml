@@ -1,0 +1,19 @@
+lb_order:
+  - oid: 1
+    uid: 100
+    total_amount: 999
+    status: 'NONPAYMENT'
+    create_time: '2017-01-01 00:00:00'
+    update_time: '2017-01-01 00:00:00'
+  - oid: 2
+    uid: 100
+    total_amount: 203
+    status: 'PENDING'
+    create_time: '2017-01-01 00:00:00'
+    update_time: '2017-01-01 00:00:00'
+  - oid: 3
+    uid: 101
+    total_amount: 987
+    status: 'SHIPPED'
+    create_time: '2017-01-01 00:00:00'
+    update_time: '2017-01-01 00:00:00'

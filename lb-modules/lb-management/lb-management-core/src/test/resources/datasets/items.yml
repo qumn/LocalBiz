@@ -1,0 +1,16 @@
+lb_order_item:
+  - oiid: 1
+    oid: 1
+    sid: 1
+    count: 999
+    appointment_time: '2017-01-01 00:00:00'
+  - oiid: 2
+    oid: 1
+    sid: 2
+    count: 999
+    appointment_time: '2017-01-01 00:00:00'
+  - oiid: 3
+    oid: 2
+    sid: 1
+    count: 999
+    appointment_time: '2017-01-01 00:00:00'

@@ -32,6 +32,8 @@ public class Order {
      * 用户id
      */
     private Long uid;
+
+    private Long mid;
     /**
      * 订单总金额
      */

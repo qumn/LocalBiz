@@ -5,16 +5,21 @@
     <resultMap type="xyz.qumn.lb.management.core.pojo.entity.Order" id="OrderMap">
         <result property="oid" column="oid"/>
         <result property="uid" column="uid"/>
+        <result property="mid" column="mid"/>
         <result property="totalAmount" column="total_amount"/>
         <result property="status" column="status" javaType="xyz.qumn.lb.management.api.enums.OrderStatus"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="order_create_time"/>
+        <result property="updateTime" column="order_update_time"/>
         <collection property="items" ofType="xyz.qumn.lb.management.core.pojo.entity.OrderItem">
             <id property="oiid" column="oiid"/>
             <result property="oid" column="oid"/>
             <result property="sid" column="sid"/>
             <result property="count" column="count"/>
             <result property="appointmentTime" column="appointment_time"/>
+            <association property="specification"
+                         resultMap="xyz.qumn.lb.management.core.dao.SpecificationMapper.SimpleSpecification"/>
+            <association property="commodity"
+                         resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.SimpleCommodity"/>
         </collection>
     </resultMap>
 
@@ -22,9 +27,10 @@
         select lo.oid,
                lo.uid,
                lo.total_amount,
+               lo.mid,
                lo.status,
-               lo.create_time,
-               lo.update_time,
+               lo.create_time order_create_time,
+               lo.update_time order_update_time,
                loi.oiid,
                loi.sid,
                loi.count,
@@ -33,9 +39,53 @@
                  left join lb_order_item loi using (oid)
     </sql>
 
+    <sql id="orderSelectDetail">
+        select lo.oid,
+               lo.uid,
+               lo.total_amount,
+               lo.mid,
+               lo.status,
+               lo.create_time order_create_time,
+               lo.update_time order_update_time,
+               loi.oiid,
+               loi.sid,
+               loi.count,
+               loi.appointment_time,
+               lc.cid,
+               lc.`name`,
+               lc.`cat_id`,
+               lc.`img`,
+               lc.`desc`,
+               lc.mid,
+               lc.create_time,
+               lc.update_time,
+               lc.type,
+               lcs.price,
+               lcs.price,
+               lcsa.aid,
+               lcsa.`value`,
+               lcsa.`key`
+        from lb_order lo
+                 left join lb_order_item loi using (oid)
+                 left join lb_commodity_spc lcs on loi.sid = lcs.sid
+                 left join lb_commodity lc on lcs.cid = lc.cid
+                 left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
+    </sql>
+
+    <update id="modifyStatus">
+        update lb_order
+        set status = #{status}
+        where oid = #{oid}
+    </update>
+
     <select id="selectById" resultMap="OrderMap">
-        <include refid="orderSelect"/>
+        <include refid="orderSelectDetail"/>
         where lo.oid = #{oid}
+    </select>
+
+    <select id="selectByMid" resultMap="OrderMap">
+        <include refid="orderSelect"/>
+        where mid = #{mid}
     </select>
 
 </mapper>

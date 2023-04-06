@@ -125,11 +125,11 @@ function handleUpdateFormModelByModalType() {
 
 function handleSubmit() {
 	if (props.type == 'edit') {
-		putCommodity(formModel as LB.Commodity);
+		putCommodity(formModel as LB.Commodity)
 	} else if (props.type == 'add') {
-		postCommodity(formModel as LB.Commodity);
+		postCommodity(formModel as LB.Commodity)
 	}
-	modalVisible.value = false;
+	modalVisible.value = false
 }
 
 watch(

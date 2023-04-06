@@ -18,19 +18,19 @@
             <result property="mid" column="mid"/>
             <result property="priority" column="priority"/>
         </association>
-        <collection property="specifications" javaType="java.util.List" resultMap="specification"/>
+        <collection property="specifications" javaType="java.util.List" resultMap="SimpleCommodity"/>
     </resultMap>
 
-    <resultMap id="specification" type="xyz.qumn.lb.management.core.pojo.entity.Specification">
-        <id property="sid" column="sid"/>
+
+    <resultMap id="SimpleCommodity" type="xyz.qumn.lb.management.core.pojo.entity.Commodity">
         <result property="cid" column="cid"/>
-        <result property="price" column="price"/>
-        <collection property="attributes" ofType="xyz.qumn.lb.management.core.pojo.entity.SpecificationAttribute">
-            <id property="aid" column="aid" jdbcType="INTEGER"/>
-            <result property="sid" column="sid"/>
-            <result property="key" column="key" jdbcType="VARCHAR"/>
-            <result property="value" column="value" jdbcType="VARCHAR"/>
-        </collection>
+        <result property="catId" column="cat_id"/>
+        <result property="desc" column="desc"/>
+        <result property="img" column="img"/>
+        <result property="mid" column="mid"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectCommodity">

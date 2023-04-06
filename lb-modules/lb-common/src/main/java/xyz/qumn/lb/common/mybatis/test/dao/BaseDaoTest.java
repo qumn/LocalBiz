@@ -51,6 +51,7 @@ public class BaseDaoTest {
                 if (!Initialed) {
                     ClassicConfiguration conf = new ClassicConfiguration();
                     conf.setDataSource(dataSource);
+                    conf.setDefaultSchema("lb");
                     Flyway flyway = new Flyway(conf);
                     flyway.migrate();
                     Initialed = true;

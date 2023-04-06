@@ -11,6 +11,7 @@
         <result property="name" column="name"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="type" column="type"/>
         <association property="category" javaType="xyz.qumn.lb.management.core.pojo.entity.Category">
             <id property="catId" column="cat_id"/>
             <result property="name" column="cat_name"/>
@@ -41,6 +42,7 @@
                c.`name`,
                c.create_time,
                c.update_time,
+               c.type,
                lcat.name as cat_name,
                lcat.priority,
                lcs.sid,

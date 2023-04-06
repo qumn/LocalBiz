@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import xyz.qumn.lb.management.api.enums.CommodityType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Commodity {
     String name;
     // 商品图片
     String img;
+    CommodityType type;
     // 商品简介
     @TableField("`desc`")
     String desc;

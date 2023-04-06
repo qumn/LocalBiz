@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import xyz.qumn.lb.common.mybatis.test.dao.BaseDaoTest;
+import xyz.qumn.lb.management.api.enums.CommodityType;
 import xyz.qumn.lb.management.core.pojo.entity.Commodity;
 
 import java.util.List;
@@ -41,5 +42,14 @@ public class CommodityMapperTest extends BaseDaoTest {
         assertThat(commodities)
                 .isNotNull()
                 .hasSize(4);
+    }
+
+    @Test
+    @DataSet(value = "commodities.yml")
+    public void shouldWorkTypeColumn() {
+        Commodity commodity = commodityMapper.selectById(1L);
+        assertThat(commodity).isNotNull();
+        assertThat(commodity.getType()).isNotNull()
+                .isEqualTo(CommodityType.PHYSICAL);
     }
 }

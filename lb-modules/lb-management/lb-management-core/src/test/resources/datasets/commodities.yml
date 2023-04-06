@@ -5,6 +5,7 @@ lb_commodity:
     desc: "desc1"
     img: "img1"
     name: "commodity1"
+    type: "PHYSICAL"
     create_time: "2023-03-30 17:26:12.323193"
     update_time: "2023-03-30 17:26:12.323171"
   - cid: 2
@@ -13,6 +14,7 @@ lb_commodity:
     desc: "desc2"
     img: "img2"
     name: "commodity2"
+    type: "SERVICE"
     create_time: "2023-03-30 17:26:12.323203"
     update_time: "2023-03-30 17:26:12.3232"
   - cid: 3
@@ -21,6 +23,7 @@ lb_commodity:
     desc: "desc3"
     img: "img3"
     name: "commodity3"
+    type: "PHYSICAL"
     create_time: "2023-03-30 17:26:12.32321"
     update_time: "2023-03-30 17:26:12.323208"
   - cid: 4
@@ -29,6 +32,7 @@ lb_commodity:
     desc: "desc4"
     img: "img4"
     name: "commodity4"
+    type: "PHYSICAL"
     create_time: "2023-03-30 17:26:12.323215"
     update_time: "2023-03-30 17:26:12.323213"
   - cid: 5
@@ -37,5 +41,6 @@ lb_commodity:
     desc: "desc5"
     img: "img5"
     name: "commodity5"
+    type: "PHYSICAL"
     create_time: "2023-03-30 17:26:12.323221"
     update_time: "2023-03-30 17:26:12.323219"

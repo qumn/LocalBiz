@@ -1,6 +1,7 @@
 package com.ruoyi.system.controller;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -124,6 +125,19 @@ public class SysUserController extends BaseController
         sysUserVo.setRoles(roles);
         sysUserVo.setPermissions(permissions);
         return R.ok(sysUserVo);
+    }
+
+
+    @GetMapping("/sysuser/{uid}")
+    public R<SysUser> getUserInfoById(@PathVariable("uid") Long uid){
+        SysUser sysUser = userService.selectUserById(uid);
+        return R.ok(sysUser);
+    }
+
+    @GetMapping("/sysusers")
+    public R<List<SysUser>> getUserInfoByIds(@RequestParam("uids") List<Long> uids){
+        List<SysUser> sysUsers = userService.selectUserByIds(uids);
+        return R.ok(sysUsers);
     }
 
     /**

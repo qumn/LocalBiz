@@ -10,6 +10,9 @@ import com.ruoyi.system.api.domain.SysUser;
 import com.ruoyi.system.api.factory.RemoteUserFallbackFactory;
 import com.ruoyi.system.api.model.LoginUser;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * 用户服务
  * 
@@ -27,6 +30,13 @@ public interface RemoteUserService
      */
     @GetMapping("/user/info/{username}")
     public R<LoginUser> getUserInfo(@PathVariable("username") String username, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+
+    @GetMapping("/user/sysuser/{uid}")
+    public R<SysUser> getUserInfoById(@PathVariable("uid") Long uid);
+
+    @GetMapping("/user/sysusers")
+    public R<List<SysUser>> getUserInfoByIds(@RequestParam("uids") Collection<Long> uid);
+
 
     /**
      * 注册用户信息

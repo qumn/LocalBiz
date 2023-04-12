@@ -1,7 +1,9 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import jakarta.validation.Validator;
 
@@ -124,6 +126,13 @@ public class SysUserServiceImpl implements ISysUserService
     public SysUser selectUserById(Long userId)
     {
         return userMapper.selectUserById(userId);
+    }
+
+    @Override
+    public List<SysUser> selectUserByIds(List<Long> uids) {
+        if (CollectionUtils.isEmpty(uids))
+            return new ArrayList<>();
+        return userMapper.selectUserByIds(uids);
     }
 
     /**

@@ -53,6 +53,9 @@ public interface SysUserMapper
      */
     public SysUser selectUserById(Long userId);
 
+
+    List<SysUser> selectUserByIds(@Param("uids") List<Long> uids);
+
     /**
      * 新增用户信息
      * 

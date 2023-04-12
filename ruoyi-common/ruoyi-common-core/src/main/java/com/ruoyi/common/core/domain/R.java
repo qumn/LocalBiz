@@ -98,6 +98,11 @@ public class R<T> implements Serializable
         return data;
     }
 
+    public T getDataOrDefault(T defaultValue)
+    {
+        return data == null ? defaultValue : data;
+    }
+
     public void setData(T data)
     {
         this.data = data;

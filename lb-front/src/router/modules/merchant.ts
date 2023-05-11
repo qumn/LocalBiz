@@ -15,6 +15,12 @@ const merchant: AuthRoute.Route = {
       path: '/merchant/management',
       component: 'self',
       meta: { title: '管理界面', icon: 'mdi:menu' }
+    },
+    {
+      name: 'merchant_order',
+      path: '/merchant/order',
+      component: 'self',
+      meta: { title: '订单管理', icon: 'mdi:menu' }
     }
   ]
 };

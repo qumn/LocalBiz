@@ -1,4 +1,4 @@
-CREATE TABLE `lb_order_item`
+CREATE TABLE if not exists `lb_order_item`
 (
     `oiid`             bigint   NULL COMMENT 'order item id',
     `oid`              bigint   NULL comment 'order id',

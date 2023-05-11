@@ -35,6 +35,7 @@ export const views: Record<
   management_route: () => import('./management/route/index.vue'),
   management_user: () => import('./management/user/index.vue'),
   merchant_management: () => import('./merchant/management/index.vue'),
+  merchant_order: () => import('./merchant/order/index.vue'),
   merchant_register: () => import('./merchant/register/index.vue'),
   'multi-menu_first_second-new_third': () => import('./multi-menu/first/second-new/third/index.vue'),
   'multi-menu_first_second': () => import('./multi-menu/first/second/index.vue'),

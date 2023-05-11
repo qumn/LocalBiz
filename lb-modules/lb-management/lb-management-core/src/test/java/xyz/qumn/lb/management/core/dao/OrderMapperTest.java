@@ -46,8 +46,6 @@ public class OrderMapperTest extends BaseDaoTest {
     public void shouldWorkSelectByMid() {
         List<Order> orders = orderMapper.selectByMid(1L);
         assertThat(orders).isNotNull().hasSize(2);
-        assertThat(orders.get(0).getItems()).isNotNull().hasSize(2);
-        assertThat(orders.get(1).getItems()).isNotNull().hasSize(1);
     }
 
 

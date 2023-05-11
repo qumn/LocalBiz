@@ -17,6 +17,6 @@ lb_order:
     uid: 101
     mid: 2
     total_amount: 987
-    status: 'SHIPPED'
+    status: 'SHIPPING'
     create_time: '2017-01-01 00:00:00'
     update_time: '2017-01-01 00:00:00'

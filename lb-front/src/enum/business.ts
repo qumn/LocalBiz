@@ -13,3 +13,13 @@ export enum EnumLoginModule {
   'reset-pwd' = '重置密码',
   'bind-wechat' = '微信绑定'
 }
+
+export enum EnumOrderStatus {
+	NONPAYMENT = 'NONPAYMENT',
+	PENDING = 'PENDING',
+	CANCELLED = 'CANCELLED',
+	REFUSED = 'REFUSED',
+	SHIPPED = 'SHIPPED',
+	WAITING = 'WAITING',
+	DELIVERED = 'DELIVERED',
+}

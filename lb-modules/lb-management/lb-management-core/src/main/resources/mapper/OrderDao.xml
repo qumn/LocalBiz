@@ -22,6 +22,15 @@
                          resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.SimpleCommodity"/>
         </collection>
     </resultMap>
+    <resultMap id="OrderListMap" type="xyz.qumn.lb.management.core.pojo.entity.Order">
+        <result property="oid" column="oid"/>
+        <result property="uid" column="uid"/>
+        <result property="mid" column="mid"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="status" column="status" javaType="xyz.qumn.lb.management.api.enums.OrderStatus"/>
+        <result property="createTime" column="order_create_time"/>
+        <result property="updateTime" column="order_update_time"/>
+    </resultMap>
 
     <sql id="orderSelect">
         select lo.oid,
@@ -30,13 +39,8 @@
                lo.mid,
                lo.status,
                lo.create_time order_create_time,
-               lo.update_time order_update_time,
-               loi.oiid,
-               loi.sid,
-               loi.count,
-               loi.appointment_time
+               lo.update_time order_update_time
         from lb_order lo
-                 left join lb_order_item loi using (oid)
     </sql>
 
     <sql id="orderSelectDetail">
@@ -83,7 +87,7 @@
         where lo.oid = #{oid}
     </select>
 
-    <select id="selectByMid" resultMap="OrderMap">
+    <select id="selectByMid" resultMap="OrderListMap">
         <include refid="orderSelect"/>
         where mid = #{mid}
     </select>

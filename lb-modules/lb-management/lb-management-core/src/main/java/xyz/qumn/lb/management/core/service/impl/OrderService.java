@@ -51,4 +51,9 @@ public class OrderService implements IOrderService {
     public void refuse(Long oid) {
         orderMp.modifyStatus(oid, OrderStatus.REFUSED);
     }
+
+    @Override
+    public void save(Order order) {
+        orderMp.insert(order);
+    }
 }

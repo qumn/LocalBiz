@@ -4,6 +4,7 @@ import { Button } from './components/button'
 import colors from './colors'
 import { fetchMerchant } from './apis/merchant'
 
+const FILE_BASERUL = 'http://localhost:9300/statics'
 function Search() {
   return <TextInput style={styles.searchIput}></TextInput>
 }
@@ -33,7 +34,18 @@ function Merchats() {
   if (isError) {
     return <Text>error</Text>
   }
-  return <Text>{ JSON.stringify(merchants) }</Text>
+  let merchantItesm = merchants.map((m) => {
+    return (
+      <View style={styles.merchantItem} key={m.mid}>
+        <Image style={styles.merchantImage} source={{ uri: FILE_BASERUL + m.introImg }}></Image>
+        <View style={styles.merchantInfo}>
+          <Text>{m.name}</Text>
+          <Text>{m.desc}</Text>
+        </View>
+      </View>
+    )
+  })
+  return <View style={styles.merchantContainer}>{merchantItesm}</View>
 }
 
 export default function App() {
@@ -56,9 +68,8 @@ export default function App() {
           <Search />
         </View>
       </View>
-      <Merchats></Merchats>
       <View style={styles.contentContainer}>
-        <Content style={styles.content} />
+        <Merchats></Merchats>
       </View>
       <View style={styles.bottomContainer}>
         <Bottom />
@@ -124,4 +135,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
+  merchantContainer: {
+    flexDiretion: 'column',
+    alignItems: 'center',
+  },
+  merchantItem: {
+    flextDirection: 'row',
+  },
+  merchantImage: {
+    flex: 1,
+  },
+  merchantInfo: {
+    flex: 3,
+  }
 })

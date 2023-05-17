@@ -32,6 +32,10 @@ public class MerchantController extends BaseController {
     public AjaxResult list(){
         return success(merchantMapper.selectList(null));
     }
+    @GetMapping("/{merchantId}")
+    public AjaxResult get(@PathVariable Long merchantId){
+        return success(merchantMapper.selectById(merchantId));
+    }
 
     /**
      * 获取当前用户的商户列表

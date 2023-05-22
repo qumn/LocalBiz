@@ -3,7 +3,7 @@ import { get } from './index'
 
 export function fetchMerchant() {
   const { data, error, isLoading } = useSWR(
-    'http://localhost:8080/lb/management/merchant/list',
+    'http://192.168.0.106:8080/lb/management/merchant/list',
     get
   )
   return {

@@ -4,7 +4,7 @@ import { Button } from './components/button'
 import colors from './colors'
 import { fetchMerchant } from './apis/merchant'
 
-const FILE_BASERUL = 'http://localhost:9300/statics'
+const FILE_BASERUL = 'http://192.168.0.106:9300/statics'
 function Search() {
   return <TextInput style={styles.searchIput}></TextInput>
 }
@@ -39,7 +39,7 @@ function Merchats() {
       <View style={styles.merchantItem} key={m.mid}>
         <Image style={styles.merchantImage} source={{ uri: FILE_BASERUL + m.introImg }}></Image>
         <View style={styles.merchantInfo}>
-          <Text>{m.name}</Text>
+          <Text style={styles.merchantTitle}>{m.name}</Text>
           <Text>{m.desc}</Text>
         </View>
       </View>
@@ -80,6 +80,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  '*': {
+    boxSizing: 'border-box',
+  },
   container: {
     flex: 1,
     paddingTop: 20,
@@ -140,12 +143,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   merchantItem: {
-    flextDirection: 'row',
+    flexDirection: 'row',
+    width: '92%',
+    height: 100,
+
+    marginHorizontal: 20,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+
+    backgroundColor: colors.surface_light,
+
+    borderRadius: 5,
+    borderColor: colors.on_error_light,
+    borderstyle: 'solid',
+    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(15, 23, 42, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px',
   },
   merchantImage: {
     flex: 1,
+    marginRight: 20
   },
   merchantInfo: {
     flex: 3,
+  },
+  merchantTitle: {
+
   }
 })

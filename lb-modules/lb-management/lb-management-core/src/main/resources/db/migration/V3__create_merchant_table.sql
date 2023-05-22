@@ -9,6 +9,7 @@ create table if not exists lb_merchant
     `name`      varchar(255) null comment '商店名称',
     `owner`     bigint       null comment '店主的id',
     phone       varchar(255) null comment '手机号',
+    score       float        null comment '评分',
     create_time datetime(6)  null comment '创建时间',
     update_time datetime(6)  null comment '修改时间'
 );

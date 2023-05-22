@@ -47,7 +47,7 @@ public class RouterFunctionConfiguration
      * 跨域配置
      */
     @Bean
-    public WebFilter corsFilter()
+    public WebFilter crosFilter()
     {
         return (ServerWebExchange ctx, WebFilterChain chain) -> {
             ServerHttpRequest request = ctx.getRequest();

@@ -27,6 +27,7 @@ import reactor.core.publisher.Flux;
 public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
 {
     private final static String[] VALIDATE_URL = new String[] { "/auth/login", "/auth/register" };
+    private final static String[] DONT_NEED_VALIDATE_USER_AGENT = new String[] { "PostmanRuntime", "LocalBizMobile" };
 
     @Autowired
     private ValidateCodeService validateCodeService;
@@ -43,6 +44,10 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
     {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
+            String userAgent = request.getHeaders().getFirst("User-Agent");
+            if(StringUtils.containsAnyIgnoreCase(userAgent, DONT_NEED_VALIDATE_USER_AGENT)) {
+                return chain.filter(exchange);
+            }
 
             // 非登录/注册请求或验证码关闭，不处理
             if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), VALIDATE_URL) || !captchaProperties.getEnabled())

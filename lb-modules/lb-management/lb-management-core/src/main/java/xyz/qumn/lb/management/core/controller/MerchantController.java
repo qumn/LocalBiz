@@ -30,6 +30,7 @@ public class MerchantController extends BaseController {
      */
     @GetMapping("/list")
     public AjaxResult list(){
+        startPage();
         return success(merchantMapper.selectList(null));
     }
     @GetMapping("/{merchantId}")

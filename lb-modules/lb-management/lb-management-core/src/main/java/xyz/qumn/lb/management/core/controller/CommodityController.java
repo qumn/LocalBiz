@@ -30,7 +30,8 @@ public class CommodityController {
         commodity.setMid(mid);
         commodity.setCatId(catId);
         QueryWrapper<Commodity> queryWrapper = new QueryWrapper<>(commodity);
-        return R.ok(commodityCvt.entity2DtoDetails(commodityMapper.selectList(queryWrapper)));
+        List<Commodity> commodities = commodityMapper.selectByMid(mid);
+        return R.ok(commodityCvt.entity2DtoDetails(commodities));
     }
 
     @GetMapping("/{cid}")

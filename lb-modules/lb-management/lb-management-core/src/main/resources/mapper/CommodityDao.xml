@@ -18,7 +18,7 @@
             <result property="mid" column="mid"/>
             <result property="priority" column="priority"/>
         </association>
-        <collection property="specifications" javaType="java.util.List" resultMap="SimpleCommodity"/>
+<!--        <collection property="specifications" javaType="java.util.List" resultMap="SimpleCommodity"/>-->
     </resultMap>
 
 

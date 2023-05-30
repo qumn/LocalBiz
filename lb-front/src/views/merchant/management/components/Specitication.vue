@@ -47,26 +47,27 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 export interface Props {
-	value: LB.Specification[]
+	value?: LB.Specification[]
 }
 const props = defineProps<Props>()
+const specs = computed({
+	get() {
+		return props.value || []
+	},
+	set(specs: LB.Specification[]) {
+		console.log('set specs new value: ' + JSON.stringify(specs))
+		emits('update:value', specs)
+	},
+})
+
 const atbDiv = ref<HTMLDivElement | null>(null)
 const specsDiv = ref<HTMLDivElement | null>(null)
-let selected = ref(props.value.length > 0 ? props.value[0] : null)
+let selected = ref(specs.value.length > 0 ? specs.value[0] : null)
 
 interface Emits {
 	(e: 'update:value', value: LB.Specification[]): void
 }
 const emits = defineEmits<Emits>()
-
-const specs = computed({
-	get() {
-		return props.value
-	},
-	set(specs: LB.Specification[]) {
-		emits('update:value', specs)
-	},
-})
 
 function addSpc() {
 	const spc = {
@@ -101,7 +102,7 @@ function filterEmptySpecs() {
 			(spec) => spec.price || spec.sid || spec.attributes.length > 0
 		)
 		if (!filted.find(t => t == selected.value)) {
-			selected.value = props.value.length > 0 ? props.value[0] : null;
+			selected.value = props.value?.length ? props.value[0] : null
 		}
 		specs.value = filted
 	}

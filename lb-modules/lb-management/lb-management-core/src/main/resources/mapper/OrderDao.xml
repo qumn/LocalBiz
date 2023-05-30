@@ -22,6 +22,7 @@
                          resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.SimpleCommodity"/>
         </collection>
     </resultMap>
+
     <resultMap id="OrderListMap" type="xyz.qumn.lb.management.core.pojo.entity.Order">
         <result property="oid" column="oid"/>
         <result property="uid" column="uid"/>
@@ -44,36 +45,40 @@
     </sql>
 
     <sql id="orderSelectDetail">
-        select lo.oid,
-               lo.uid,
-               lo.total_amount,
-               lo.mid,
-               lo.status,
-               lo.create_time order_create_time,
-               lo.update_time order_update_time,
-               loi.oiid,
-               loi.sid,
-               loi.count,
-               loi.appointment_time,
-               lc.cid,
-               lc.`name`,
-               lc.`cat_id`,
-               lc.`img`,
-               lc.`desc`,
-               lc.mid,
-               lc.create_time,
-               lc.update_time,
-               lc.type,
-               lcs.price,
-               lcs.price,
-               lcsa.aid,
-               lcsa.`value`,
-               lcsa.`key`
-        from lb_order lo
-                 left join lb_order_item loi using (oid)
-                 left join lb_commodity_spc lcs on loi.sid = lcs.sid
-                 left join lb_commodity lc on lcs.cid = lc.cid
-                 left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
+        WITH commodity_spc_atb AS (
+            SELECT
+                lc.cid,
+                lc.`name`,
+                lc.`cat_id`,
+                lc.`img`,
+                lc.`desc`,
+                lc.mid,
+                lc.create_time,
+                lc.update_time,
+                lc.type,
+                lcs.sid,
+                lcs.price,
+                lcsa.aid,
+                lcsa.`value`,
+                lcsa.`key`
+            FROM
+                lb_commodity lc
+                    LEFT JOIN lb_commodity_spc lcs USING ( cid )
+                    LEFT JOIN lb_commodity_spc_atb lcsa USING ( sid )
+        )
+        SELECT
+              lo.oid,
+              lo.uid,
+              lo.total_amount,
+              lo.mid,
+              lo.STATUS,
+              lo.create_time order_create_time,
+              lo.update_time order_update_time,
+              csa.*
+        FROM
+            lb_order lo
+                LEFT JOIN lb_order_item loi USING ( oid )
+                LEFT JOIN commodity_spc_atb csa USING ( sid )
     </sql>
 
     <update id="modifyStatus">
@@ -87,9 +92,23 @@
         where lo.oid = #{oid}
     </select>
 
-    <select id="selectByMid" resultMap="OrderListMap">
-        <include refid="orderSelect"/>
-        where mid = #{mid}
+    <select id="query" resultMap="OrderMap">
+        <include refid="orderSelectDetail" />
+        <where>
+            <if test="order.oid != null">
+                and lo.oid = #{order.oid}
+            </if>
+            <if test="order.uid != null">
+                and lo.uid = #{order.uid}
+            </if>
+            <if test="order.mid != null">
+                and lo.mid = #{order.mid}
+            </if>
+            <if test="order.status != null">
+                and lo.status = #{order.status}
+            </if>
+        </where>
+
     </select>
 
 </mapper>

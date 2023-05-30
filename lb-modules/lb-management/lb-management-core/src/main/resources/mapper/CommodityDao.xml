@@ -18,7 +18,7 @@
             <result property="mid" column="mid"/>
             <result property="priority" column="priority"/>
         </association>
-<!--        <collection property="specifications" javaType="java.util.List" resultMap="SimpleCommodity"/>-->
+        <collection property="specifications" javaType="java.util.List" resultMap="xyz.qumn.lb.management.core.dao.SpecificationMapper.SimpleSpecification"/>
     </resultMap>
 
 
@@ -63,6 +63,29 @@
     <select id="selectById" resultMap="CommodityMap">
         <include refid="selectCommodity"/>
         where c.cid = #{cid}
+    </select>
+    <select id="query" resultMap="CommodityMap">
+        <include refid="selectCommodity"/>
+        <where>
+            <if test="cid != null">
+                and c.cid = #{cid}
+            </if>
+            <if test="catId != null">
+                and c.cat_id = #{catId}
+            </if>
+            <if test="mid != null">
+                and c.mid = #{mid}
+            </if>
+            <if test="name != null">
+                and c.name like concat('%', #{name}, '%')
+            </if>
+            <if test="type != null">
+                and c.type = #{type}
+            </if>
+            <if test="desc != null">
+                and c.desc like concat('%', #{desc}, '%')
+            </if>
+        </where>
     </select>
 
 

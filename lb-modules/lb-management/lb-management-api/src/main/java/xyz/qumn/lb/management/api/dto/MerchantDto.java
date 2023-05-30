@@ -20,6 +20,7 @@ public class MerchantDto {
     String name;
     String password;
     String desc;
+    Double score;
     String introImg;
     @JsonSerialize(using = PointToJsonSerializer.class)
     @JsonDeserialize(using = JsonToPointDeserializer.class)

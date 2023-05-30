@@ -47,7 +47,7 @@
 	</n-card>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="tsx" type="tsx">
 import { ref, reactive } from 'vue'
 import type { Ref } from 'vue'
 import {
@@ -144,8 +144,9 @@ const pagination: PaginationProps = reactive({
 
 async function updateCategories() {
 	const merchants = localStg.get('merchants') ?? []
+	console.log("merchants: "+ JSON.stringify(merchants))
 	if (merchants.length > 0) {
-		const merchant = merchants[0]
+		const merchant = merchants[1]
 		const { data } = await fetchCategories(merchant.mid)
 		categories.value = data ?? []
 	} else {
@@ -167,6 +168,7 @@ async function handleEditCommodity(cid: number) {
 function handleDeleteCommodity(mid: number) {
 	openModal()
 }
+
 function handleAddCommodity() {}
 async function init() {
 	await updateCategories()

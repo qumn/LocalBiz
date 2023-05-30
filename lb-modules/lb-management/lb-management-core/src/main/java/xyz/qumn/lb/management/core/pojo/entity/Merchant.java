@@ -26,6 +26,7 @@ public class Merchant {
     // 名称
     // 商店名称")
     String name;
+    Double score;
     @TableField("`desc`")
     // 商铺简介
     String desc;

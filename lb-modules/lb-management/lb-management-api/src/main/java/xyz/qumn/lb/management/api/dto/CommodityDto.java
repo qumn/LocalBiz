@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import xyz.qumn.lb.management.api.enums.CommodityType;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +20,5 @@ public class CommodityDto {
     CommodityType type;
     Date createTime;
     Date updateTime;
+    List<SpecificationDto> specifications;
 }

@@ -8,7 +8,7 @@
         <result property="name" column="cat_name" jdbcType="VARCHAR"/>
         <result property="priority" column="priority" jdbcType="INTEGER"/>
         <collection property="commodities" ofType="xyz.qumn.lb.management.core.pojo.entity.Commodity"
-                    resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.SimpleCommodity"/>
+                    resultMap="xyz.qumn.lb.management.core.dao.CommodityMapper.CommodityMap"/>
     </resultMap>
 
 
@@ -21,11 +21,20 @@
                lc.cat_id,
                lc.`desc`,
                lc.img,
+               lc.mid,
                lc.`name`,
                lc.create_time,
-               lc.update_time
+               lc.update_time,
+               lc.type,
+               lcs.sid,
+               lcs.price,
+               lcsa.aid,
+               lcsa.`key`,
+               lcsa.value
         from lb_category lcat
                  left join lb_commodity lc on lc.cat_id = lcat.cat_id
+                 left join lb_commodity_spc lcs on lc.cid = lcs.cid
+                 left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
         where lcat.mid = #{mid}
     </select>
 

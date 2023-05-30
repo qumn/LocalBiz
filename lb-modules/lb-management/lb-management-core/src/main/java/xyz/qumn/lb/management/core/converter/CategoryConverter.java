@@ -9,7 +9,7 @@ import xyz.qumn.lb.management.core.pojo.entity.Category;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {CommodityConverter.class})
+@Mapper(componentModel = "spring", uses = {CommodityConverter.class, SpecificationConverter.class})
 public interface CategoryConverter {
 
     @Named("entity2Dto")

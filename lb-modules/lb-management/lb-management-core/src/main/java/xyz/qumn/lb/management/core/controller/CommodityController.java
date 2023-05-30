@@ -29,8 +29,7 @@ public class CommodityController {
         Commodity commodity = new Commodity();
         commodity.setMid(mid);
         commodity.setCatId(catId);
-        QueryWrapper<Commodity> queryWrapper = new QueryWrapper<>(commodity);
-        List<Commodity> commodities = commodityMapper.selectByMid(mid);
+        List<Commodity> commodities = commodityMapper.query(commodity);
         return R.ok(commodityCvt.entity2DtoDetails(commodities));
     }
 

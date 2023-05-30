@@ -28,7 +28,9 @@ public class OrderService implements IOrderService {
 
     @Override
     public List<OrderDto> selectByMid(Long mid) {
-        List<Order> orders = orderMp.selectByMid(mid);
+        Order order = new Order();
+        order.setMid(mid);
+        List<Order> orders = orderMp.query(order);
         List<OrderDto> orderDtos = orderCvt.entity2Dtos(orders);
         Map<Long, List<OrderDto>> uid2OrderDto = orderDtos.stream().collect(Collectors.groupingBy(OrderDto::getUid));
         Set<Long> uids = uid2OrderDto.keySet();
@@ -40,13 +42,24 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public List<OrderDto> selectByUid(Long uid, OrderStatus status) {
+        Order order = new Order();
+        order.setStatus(status);
+        order.setUid(uid);
+        List<Order> orders = orderMp.query(order);
+        return orderCvt.entity2Dtos(orders);
+    }
+
+    @Override
     public void accept(Long oid) {
         orderMp.modifyStatus(oid, OrderStatus.SHIPPING);
     }
+
     @Override
     public void cancel(Long oid) {
         orderMp.modifyStatus(oid, OrderStatus.CANCELLED);
     }
+
     @Override
     public void refuse(Long oid) {
         orderMp.modifyStatus(oid, OrderStatus.REFUSED);

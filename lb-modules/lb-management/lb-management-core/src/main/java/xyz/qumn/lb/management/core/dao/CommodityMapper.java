@@ -10,4 +10,5 @@ import java.util.List;
 public interface CommodityMapper extends BaseMapper<Commodity> {
     Commodity selectById(Long cid);
     List<Commodity> selectByMid(Long mid);
+    List<Commodity> query(Commodity commodity);
 }

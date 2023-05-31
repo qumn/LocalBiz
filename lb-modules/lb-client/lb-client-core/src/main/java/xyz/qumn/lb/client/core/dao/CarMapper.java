@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CarMapper extends BaseMapper<Car> {
-    List<Car> selectByUserId(Long uid);
+    List<Car> selectByUid(Long uid);
 }

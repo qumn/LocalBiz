@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import xyz.qumn.lb.client.api.enums.CarStatusEnum;
 import xyz.qumn.lb.management.api.dto.CommodityDto;
+import xyz.qumn.lb.management.api.dto.MerchantDto;
 import xyz.qumn.lb.management.api.dto.SpecificationDto;
 
 import java.util.Date;
@@ -20,7 +21,7 @@ public class CarDto {
     /**
      * 用户id
      */
-    private Long userId;
+    private Long uid;
     /**
      * 商家id, 冗余字段方便查询
      */
@@ -40,8 +41,7 @@ public class CarDto {
     /**
      * 状态, 是否被选中
      */
-    private CarStatusEnum status;
-    /**
+    private CarStatusEnum status; /**
      * 创建时间
      */
     private Date createTime;
@@ -50,8 +50,10 @@ public class CarDto {
      */
     private Date updateTime;
 
+    private MerchantDto merchant;
+
     private CommodityDto commodity;
 
-    private SpecificationDto specDto;
+    private SpecificationDto specification;
 }
 

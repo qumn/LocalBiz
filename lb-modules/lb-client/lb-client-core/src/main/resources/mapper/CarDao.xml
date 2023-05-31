@@ -4,7 +4,7 @@
 
     <resultMap type="xyz.qumn.lb.client.core.pojo.entity.Car" id="CarMap">
         <result property="carId" column="car_id"/>
-        <result property="userId" column="user_id"/>
+        <result property="uid" column="uid"/>
         <result property="mid" column="mid"/>
         <result property="cid" column="cid"/>
         <result property="sid" column="sid"/>
@@ -15,7 +15,7 @@
     </resultMap>
     <sql id="selectCar">
         SELECT lcar.car_id,
-               lcar.user_id,
+               lcar.uid,
                lcar.mid,
                lcar.cid,
                lcar.sid,
@@ -25,9 +25,9 @@
                lcar.update_time car_update_time
         FROM lb_car lcar
     </sql>
-    <select id="selectByUserId" resultMap="CarMap">
+    <select id="selectByUid" resultMap="CarMap">
         <include refid="selectCar"/>
-        where lc.user_id = #{userId}
+        where lcar.uid = #{userId}
     </select>
     <select id="selectById" resultMap="CarMap">
         <include refid="selectCar"/>

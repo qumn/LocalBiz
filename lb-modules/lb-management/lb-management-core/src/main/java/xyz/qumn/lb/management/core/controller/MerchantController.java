@@ -8,11 +8,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.qumn.lb.management.api.dto.MerchantDto;
+import xyz.qumn.lb.management.api.dto.SpecificationDto;
 import xyz.qumn.lb.management.core.converter.MerchantConverter;
 import xyz.qumn.lb.management.core.dao.MerchantMapper;
 import xyz.qumn.lb.management.core.pojo.entity.Merchant;
 import xyz.qumn.lb.management.core.service.IMerchantService;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -33,6 +35,13 @@ public class MerchantController extends BaseController {
         startPage();
         return success(merchantMapper.selectList(null));
     }
+
+    @GetMapping("/list/ids")
+    R<List<MerchantDto>> getMerchantByMids(@RequestParam("mids") Collection<Long> mids){
+        List<Merchant> merchants = merchantMapper.selectBatchIds(mids);
+        return R.ok(merchantCvt.entity2Dtos(merchants));
+    }
+
     @GetMapping("/{merchantId}")
     public AjaxResult get(@PathVariable Long merchantId){
         return success(merchantMapper.selectById(merchantId));

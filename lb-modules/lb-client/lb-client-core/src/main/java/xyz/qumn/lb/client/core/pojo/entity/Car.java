@@ -31,7 +31,7 @@ public class Car {
     /**
      * 用户id
      */
-    private Long userId;
+    private Long uid;
     /**
      * 商家id, 冗余字段方便查询
      */

@@ -26,6 +26,26 @@
         </collection>
     </resultMap>
 
+    <sql id="selectSpecification">
+        select lcs.sid,
+               lcs.cid,
+               lcs.price,
+               lcsa.aid,
+               lcsa.key,
+               lcsa.value,
+               lc.cid,
+               lc.cat_id,
+               lc.`desc`,
+               lc.img,
+               lc.mid,
+               lc.`name`,
+               lc.create_time,
+               lc.update_time
+        from lb_commodity_spc lcs
+                 left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
+                 left join lb_commodity lc using (cid)
+    </sql>
+
     <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="sid">
         insert into lb_commodity_spc (cid, price) values
         <foreach collection="list" item="item" index="index" separator=",">
@@ -65,6 +85,13 @@
                  left join lb_commodity_spc_atb lcsa on lcs.sid = lcsa.sid
                  left join lb_commodity lc using (cid)
         where lcs.sid = #{id}
+    </select>
+
+    <select id="selectByIds" resultMap="CommoditySpcMap">
+        <include refid="selectSpecification"/>
+        <foreach collection="sids" item="sid" open="where lcs.sid in (" close=")" separator=",">
+            #{sid}
+        </foreach>
     </select>
 
 

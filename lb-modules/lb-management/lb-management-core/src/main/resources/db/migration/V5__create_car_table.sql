@@ -1,7 +1,7 @@
 CREATE TABLE if not exists `lb_car`
 (
     `car_id`      bigint                         NOT NULL AUTO_INCREMENT COMMENT 'car id',
-    `user_id`     bigint                         NULL COMMENT '用户id',
+    `uid`     bigint                         NULL COMMENT '用户id',
     `mid`         bigint                         NULL COMMENT '商家id, 冗余字段方便查询',
     `cid`         bigint                         NULL COMMENT '商品id',
     `sid`         bigint                         NULL COMMENT '商品规格id',

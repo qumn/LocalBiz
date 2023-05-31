@@ -12,4 +12,6 @@ public interface SpecificationMapper extends BaseMapper<Specification> {
     void deleteAllByCid(Long cid);
 
     int insertBatch(List<Specification> specifications);
+
+    List<Specification> selectByIds(List<Long> sids);
 }

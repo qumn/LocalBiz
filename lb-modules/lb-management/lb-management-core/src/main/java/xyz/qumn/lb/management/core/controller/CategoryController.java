@@ -5,6 +5,7 @@ import com.ruoyi.common.core.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.qumn.lb.management.api.dto.CategoryDto;
+import xyz.qumn.lb.management.api.dto.CommodityDto;
 import xyz.qumn.lb.management.api.request.category.CategoryCreateRequest;
 import xyz.qumn.lb.management.api.request.category.CategoryUpdateRequest;
 import xyz.qumn.lb.management.core.converter.CategoryConverter;
@@ -12,6 +13,7 @@ import xyz.qumn.lb.management.core.dao.CategoryMapper;
 import xyz.qumn.lb.management.core.pojo.entity.Category;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("category")
@@ -24,7 +26,18 @@ public class CategoryController {
 
     @GetMapping("/list/{mid}")
     public R<List<CategoryDto>> list(@PathVariable("mid") Long mid) {
-        return R.ok(categoryConverter.entity2Dtos(categoryMapper.selectByMid(mid)));
+        List<CategoryDto> categoryDtos = categoryConverter.entity2Dtos(categoryMapper.selectByMid(mid));
+        for (CategoryDto categoryDto : categoryDtos) {
+
+            for (CommodityDto commodity : categoryDto.getCommodities()) {
+                commodity.setSpecifications(
+                        commodity.getSpecifications().stream().filter(
+                                s -> s.getSid() != null
+                        ).collect(Collectors.toList())
+                );
+            }
+        }
+        return R.ok(categoryDtos);
     }
 
     @PostMapping

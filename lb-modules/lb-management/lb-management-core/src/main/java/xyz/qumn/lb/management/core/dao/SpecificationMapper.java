@@ -13,5 +13,5 @@ public interface SpecificationMapper extends BaseMapper<Specification> {
 
     int insertBatch(List<Specification> specifications);
 
-    List<Specification> selectByIds(List<Long> sids);
+    List<Specification> selectByIds(Iterable<Long> sids);
 }

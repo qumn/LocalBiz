@@ -10,8 +10,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="aid" useGeneratedKeys="true">
-        insert into lb_commodity_spc_atb(`key`, `value`, sid)
-        values (#{key}, #{value}, #{sid})
+        insert into lb_commodity_spc_atb(`key`, `value`, sid, create_time, update_time)
+        values (#{key}, #{value}, #{sid}, #{createTime}, #{updateTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="aid" useGeneratedKeys="true">

@@ -1,8 +1,12 @@
 package xyz.qumn.lb.client.core.service.impl;
 
+import com.ruoyi.common.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.qumn.lb.client.api.dto.CarDto;
+import xyz.qumn.lb.client.api.enums.CarStatusEnum;
+import xyz.qumn.lb.client.api.request.CartCreateRequest;
 import xyz.qumn.lb.client.core.converter.CarConverter;
 import xyz.qumn.lb.client.core.dao.CarMapper;
 import xyz.qumn.lb.client.core.pojo.entity.Car;
@@ -12,7 +16,8 @@ import xyz.qumn.lb.management.api.dto.SpecificationDto;
 import xyz.qumn.lb.management.api.feign.RemoteMerchantService;
 import xyz.qumn.lb.management.api.feign.RemoteSpecificationService;
 
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,11 +54,25 @@ public class CarService implements ICarService {
     public List<CarDto> selectByUid(Long uid) {
         List<Car> cars = carMp.selectByUid(uid);
         List<CarDto> carDtos = carCvt.entityToDtos(cars);
-        setSpecification(carDtos);
+        getSpecification(carDtos);
         return carDtos;
     }
 
-    private void setSpecification(List<CarDto> carDtos) {
+    @Override
+    @Transactional
+    public void save(List<CartCreateRequest> carts) {
+        List<Car> cars = carCvt.requestToEntities(carts);
+        Long uid = SecurityUtils.getUserId();
+        for (Car car : cars) {
+            car.setUid(uid);
+            car.setStatus(CarStatusEnum.UNSELECTED);
+            car.setUpdateTime(new Date());
+            car.setCreateTime(new Date());
+            carMp.insert(car);
+        }
+    }
+
+    private void getSpecification(List<CarDto> carDtos) {
         Set<Long> sids = carDtos.stream().map(CarDto::getSid).collect(Collectors.toSet());
         List<SpecificationDto> specs = specServ.getSpecByIds(sids).getData();
         Map<Long, SpecificationDto> specMap = specs.stream().collect(Collectors.toMap(SpecificationDto::getSid, spec -> spec));

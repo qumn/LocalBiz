@@ -1,6 +1,6 @@
 CREATE TABLE if not exists `lb_order`
 (
-    `oid`          bigint                                                                              NOT NULL COMMENT '订单id',
+    `oid`          bigint                                                                              NOT NULL auto_increment COMMENT '订单id',
     `uid`          bigint                                                                              NULL COMMENT '用户id',
     `mid`          bigint                                                                              null comment '商家id',
     `total_amount` integer                                                                             NULL COMMENT '订单总金额',

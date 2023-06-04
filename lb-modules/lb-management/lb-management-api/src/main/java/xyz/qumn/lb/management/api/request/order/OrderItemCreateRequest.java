@@ -1,10 +1,11 @@
 package xyz.qumn.lb.management.api.request.order;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class OrderItemCreateRequest {
-    private Long cid;
     private Long sid;
     private Integer count;
-    private Date appointmentTime;
 }

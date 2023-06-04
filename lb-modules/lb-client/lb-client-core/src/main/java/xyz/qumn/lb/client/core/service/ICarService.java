@@ -2,6 +2,7 @@ package xyz.qumn.lb.client.core.service;
 
 import com.ruoyi.common.core.domain.R;
 import xyz.qumn.lb.client.api.dto.CarDto;
+import xyz.qumn.lb.client.api.request.CartCreateRequest;
 import xyz.qumn.lb.management.api.dto.MerchantDto;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface ICarService {
     CarDto selectById(Long id);
 
     List<CarDto> selectByUid(Long uid);
+
+    void save(List<CartCreateRequest> carts);
 }

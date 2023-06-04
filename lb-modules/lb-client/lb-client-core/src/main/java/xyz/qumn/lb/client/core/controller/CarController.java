@@ -3,17 +3,13 @@ package xyz.qumn.lb.client.core.controller;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xyz.qumn.lb.client.api.dto.CarDto;
+import xyz.qumn.lb.client.api.request.CartCreateRequest;
 import xyz.qumn.lb.client.core.dao.CarMapper;
 import xyz.qumn.lb.client.core.service.ICarService;
-import xyz.qumn.lb.management.api.dto.MerchantDto;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/cars")
@@ -26,7 +22,7 @@ public class CarController {
     ICarService carSv;
 
     @GetMapping
-    public R<List<CarDto>> getCars(){
+    public R<List<CarDto>> getCars() {
         Long uid = SecurityUtils.getUserId();
         List<CarDto> carDtos = carSv.selectByUid(uid);
         return R.ok(carDtos);
@@ -35,6 +31,18 @@ public class CarController {
     @GetMapping("/{id}")
     public R<CarDto> getCar(@PathVariable("id") Long id) {
         return R.ok(carSv.selectById(id));
+    }
+
+    @PostMapping
+    public R<Void> addCar(@RequestBody List<CartCreateRequest> carts){
+        carSv.save(carts);
+        return R.ok();
+    }
+
+    @DeleteMapping
+    public R<Void> deleteCars(@RequestParam("cids") List<Long> cids) {
+        carMp.deleteBatchIds(cids);
+        return R.ok();
     }
 
 }

@@ -1,6 +1,7 @@
 package xyz.qumn.lb.management.core.controller;
 
 import com.ruoyi.common.core.domain.R;
+import com.ruoyi.common.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.qumn.lb.management.api.dto.OrderDto;
@@ -34,8 +35,8 @@ public class OrderController {
 
     @PostMapping
     public R<Void> createOrder(@RequestBody OrderCreateRequest orderCreateRequest){
-        Order order = orderCvt.request2Entity(orderCreateRequest);
-        orderServ.save(order);
+        Long uid = SecurityUtils.getUserId();
+        orderServ.create(orderCreateRequest);
         return R.ok();
     }
 

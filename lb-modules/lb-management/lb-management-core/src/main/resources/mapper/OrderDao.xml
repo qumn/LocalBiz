@@ -74,6 +74,10 @@
               lo.STATUS,
               lo.create_time order_create_time,
               lo.update_time order_update_time,
+              loi.oiid,
+              loi.count,
+              loi.sid,
+              loi.appointment_time,
               csa.*
         FROM
             lb_order lo

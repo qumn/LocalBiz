@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-@EnableFeignClients(basePackages = "com.ruoyi")
+@EnableFeignClients(basePackages = {"com.ruoyi", "xyz.qumn.lb"})
 @MapperScan("xyz.qumn.lb.management.core.dao")
 @SpringBootApplication
 public class LbManagementCoreApplication {

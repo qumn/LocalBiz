@@ -26,6 +26,7 @@ public class OrderDto {
     private SysUser user;
 
     private Long mid;
+    private MerchantDto merchant;
     /**
      * 订单总金额
      */

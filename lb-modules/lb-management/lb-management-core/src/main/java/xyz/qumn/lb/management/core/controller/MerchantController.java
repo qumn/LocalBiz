@@ -38,8 +38,7 @@ public class MerchantController extends BaseController {
 
     @GetMapping("/list/ids")
     R<List<MerchantDto>> getMerchantByMids(@RequestParam("mids") Collection<Long> mids){
-        List<Merchant> merchants = merchantMapper.selectBatchIds(mids);
-        return R.ok(merchantCvt.entity2Dtos(merchants));
+        return R.ok(merchantService.selectBatchIds(mids));
     }
 
     @GetMapping("/{merchantId}")

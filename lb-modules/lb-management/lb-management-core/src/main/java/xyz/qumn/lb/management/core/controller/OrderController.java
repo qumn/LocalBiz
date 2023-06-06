@@ -28,6 +28,12 @@ public class OrderController {
         return R.ok(orderMp.selectById(oid));
     }
 
+    @GetMapping("/list")
+    public R<List<OrderDto>> getListByUid() {
+        Long uid = SecurityUtils.getUserId();
+        return R.ok(orderServ.selectByUid(uid, null));
+    }
+
     @GetMapping("/list/{mid}")
     public R<List<OrderDto>> getList(@PathVariable("mid") Long mid) {
         return R.ok(orderServ.selectByMid(mid));

@@ -6,8 +6,10 @@ import com.ruoyi.system.api.domain.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.qumn.lb.management.api.dto.MerchantDto;
 import xyz.qumn.lb.management.api.dto.OrderDto;
 import xyz.qumn.lb.management.api.enums.OrderStatus;
+import xyz.qumn.lb.management.api.feign.RemoteMerchantService;
 import xyz.qumn.lb.management.api.request.order.OrderCreateRequest;
 import xyz.qumn.lb.management.api.request.order.OrderItemCreateRequest;
 import xyz.qumn.lb.management.core.converter.OrderConverter;
@@ -17,12 +19,12 @@ import xyz.qumn.lb.management.core.dao.SpecificationMapper;
 import xyz.qumn.lb.management.core.pojo.entity.Order;
 import xyz.qumn.lb.management.core.pojo.entity.OrderItem;
 import xyz.qumn.lb.management.core.pojo.entity.Specification;
+import xyz.qumn.lb.management.core.service.IMerchantService;
 import xyz.qumn.lb.management.core.service.IOrderService;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class OrderService implements IOrderService {
@@ -35,6 +37,8 @@ public class OrderService implements IOrderService {
 
     @Autowired
     SpecificationMapper specificationMapper;
+    @Autowired
+    IMerchantService merchantService;
 
     @Autowired
     RemoteUserService userService;
@@ -60,7 +64,16 @@ public class OrderService implements IOrderService {
         order.setStatus(status);
         order.setUid(uid);
         List<Order> orders = orderMp.query(order);
-        return orderCvt.entity2Dtos(orders);
+        List<OrderDto> orderDtos = orderCvt.entity2Dtos(orders);
+        Map<Long, List<OrderDto>> mid2OrderDto = orderDtos.stream().filter(o -> o.getMid() != null).collect(Collectors.groupingBy(OrderDto::getMid));
+        List<MerchantDto> merchants = merchantService.selectBatchIds(mid2OrderDto.keySet());
+
+        for (MerchantDto merchant : merchants) {
+            Long mid = merchant.getMid();
+            mid2OrderDto.get(mid).forEach(o -> o.setMerchant(merchant));
+        }
+
+        return orderDtos;
     }
 
     @Override

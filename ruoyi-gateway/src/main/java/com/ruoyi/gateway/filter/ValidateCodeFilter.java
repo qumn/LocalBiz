@@ -1,8 +1,11 @@
 package com.ruoyi.gateway.filter;
 
-import java.nio.CharBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.atomic.AtomicReference;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.ruoyi.common.core.utils.ServletUtils;
+import com.ruoyi.common.core.utils.StringUtils;
+import com.ruoyi.gateway.config.properties.CaptchaProperties;
+import com.ruoyi.gateway.service.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -10,13 +13,12 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
-import com.ruoyi.common.core.utils.ServletUtils;
-import com.ruoyi.common.core.utils.StringUtils;
-import com.ruoyi.gateway.config.properties.CaptchaProperties;
-import com.ruoyi.gateway.service.ValidateCodeService;
 import reactor.core.publisher.Flux;
+
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 验证码过滤器
@@ -24,10 +26,11 @@ import reactor.core.publisher.Flux;
  * @author ruoyi
  */
 @Component
-public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
-{
-    private final static String[] VALIDATE_URL = new String[] { "/auth/login", "/auth/register" };
-    private final static String[] DONT_NEED_VALIDATE_USER_AGENT = new String[] { "PostmanRuntime", "LocalBizMobile" };
+public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object> {
+    private final static String[] VALIDATE_URL = new String[]{"/auth/login", "/auth/register"};
+
+    private final static String clientUrl = "http://localhost:8089";
+    private final static String[] DONT_NEED_VALIDATE_USER_AGENT = new String[]{"PostmanRuntime", "LocalBizMobile"};
 
     @Autowired
     private ValidateCodeService validateCodeService;
@@ -40,37 +43,37 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
     private static final String UUID = "uuid";
 
     @Override
-    public GatewayFilter apply(Object config)
-    {
+    public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             String userAgent = request.getHeaders().getFirst("User-Agent");
-            if(StringUtils.containsAnyIgnoreCase(userAgent, DONT_NEED_VALIDATE_USER_AGENT)) {
+            if (StringUtils.containsAnyIgnoreCase(userAgent, DONT_NEED_VALIDATE_USER_AGENT)) {
+                return chain.filter(exchange);
+            }
+            // for client web end
+            // get Origin
+            List<String> origins = request.getHeaders().get("Origin");
+            if (origins != null && origins.stream().anyMatch(origin -> origin.startsWith(clientUrl))) {
                 return chain.filter(exchange);
             }
 
             // 非登录/注册请求或验证码关闭，不处理
-            if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), VALIDATE_URL) || !captchaProperties.getEnabled())
-            {
+            if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), VALIDATE_URL) || !captchaProperties.getEnabled()) {
                 return chain.filter(exchange);
             }
 
-            try
-            {
+            try {
                 String rspStr = resolveBodyFromRequest(request);
                 JSONObject obj = JSON.parseObject(rspStr);
                 validateCodeService.checkCaptcha(obj.getString(CODE), obj.getString(UUID));
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 return ServletUtils.webFluxResponseWriter(exchange.getResponse(), e.getMessage());
             }
             return chain.filter(exchange);
         };
     }
 
-    private String resolveBodyFromRequest(ServerHttpRequest serverHttpRequest)
-    {
+    private String resolveBodyFromRequest(ServerHttpRequest serverHttpRequest) {
         // 获取请求体
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();

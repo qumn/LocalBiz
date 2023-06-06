@@ -71,7 +71,7 @@ const columns: Ref<DataTableColumns<LB.Order>> = ref([
 				return <n-tag type='error'>用户取消</n-tag>
 			else if (row.status == EnumOrderStatus.REFUSED)
 				return <n-tag type='error'>商家拒绝</n-tag>
-			else if (row.status == EnumOrderStatus.SHIPPED)
+			else if (row.status == EnumOrderStatus.SHIPPING)
 				return <n-tag type='info'>配送中</n-tag>
 			else if (row.status == EnumOrderStatus.WAITING)
 				return <n-tag type='info'>配送中</n-tag>
@@ -128,9 +128,8 @@ async function updateOrders() {
 }
 
 function getMerchantId() {
-	const merchant = localStg.get('merchants')
-	if (merchant && merchant[0]) return merchant[0].mid
-	return null
+	const merchant = localStg.get('selectedMerchant')!
+	return merchant.mid
 }
 
 async function init() {

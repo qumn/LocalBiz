@@ -65,6 +65,9 @@ export const useAuthStore = defineStore("auth-store", {
 				const { data } = await getOwnMerchants();
         // save own merchants for using later
         localStg.set("merchants", data ?? [])
+				if (data && data.length >= 1) {
+					localStg.set("selectedMerchant", data[0])
+				}
 				if (!(data?.length !== 0)) {
 					routerPush('/register')
 					return;

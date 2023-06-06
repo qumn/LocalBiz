@@ -20,5 +20,6 @@ declare namespace StorageInterface {
     multiTabRoutes: App.GlobalTabRoute[];
 
     merchants: LB.Merchant[];
+		selectedMerchant: LB.Merchant;
   }
 }

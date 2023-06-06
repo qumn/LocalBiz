@@ -7,6 +7,7 @@ import ThemeMode from './ThemeMode.vue';
 import UserAvatar from './UserAvatar.vue';
 import SystemMessage from './SystemMessage.vue';
 import SettingButton from './SettingButton.vue';
+import MerchantSelect from './MerchantSelect.vue';
 
 export {
   MenuCollapse,
@@ -17,5 +18,6 @@ export {
   ThemeMode,
   UserAvatar,
   SystemMessage,
-  SettingButton
+  SettingButton,
+	MerchantSelect
 };
